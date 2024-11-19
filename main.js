@@ -12,6 +12,7 @@ const mushrooms = [
     price: 100,
     category: "Matsvamp",
     rating: 5,
+    amount: 0,
     img: {
       src: "src/assets/images/chanterelle-mushroom.jpg",
       alt: "Kantarell",
@@ -23,6 +24,7 @@ const mushrooms = [
     price: 1000,
     category: "Giftig",
     rating: 1,
+    amount: 0,
     img: {
       src: "src/assets/images/fly-agaric-mushroom.jpg",
       alt: "Flugsvamp",
@@ -34,6 +36,7 @@ const mushrooms = [
     price: 150,
     category: "Prydnad",
     rating: 4,
+    amount: 0,
     img: {
       src: "/src/assets/images/discoball-mushroom.jpg",
       alt: "Discokula formad som en svamp",
@@ -49,7 +52,7 @@ printProducts();
  * Prints all products
  */
 function printProducts() {
-  mushrooms.forEach((mushroom) => {
+  mushrooms.forEach((mushroom, index) => {
     console.log(mushroom);
     productContainer.innerHTML += `
         <article class="product-card">
@@ -57,13 +60,52 @@ function printProducts() {
           <h2>${mushroom.name}</h2>
           <h4>${mushroom.price} kr</h4>
           <p>Rating: ${mushroom.rating}</p>
-          <button>-</button>
-          <button>+</button>
+          <button class="decrement" data-id="${index}">-</button>
+          <input type="number" id="amount-${index}" value="${mushroom.amount}">
+          <button class="increment" data-id="${index}">+</button>
         </article>
       `;
   });
+
+  const incrementBtns = document.querySelectorAll("button.increment");
+  const decrementBtns = document.querySelectorAll("button.decrement");
+
+  incrementBtns.forEach((btn) => {
+    btn.addEventListener("click", increment);
+
+    decrementBtns.forEach((btn) => {
+      btn.addEventListener("click", decrement);
+    });
+  });
 }
-//---------------------------------------------------------------
+//--------------------------------------------------
+/**
+ * Increments products value by 1 and prints it
+ */
+function increment(e) {
+  const id = e.target.dataset.id;
+  mushrooms[id].amount += 1;
+  const inputField = document.querySelector(`#amount-${id}`);
+  inputField.value = mushrooms[id].amount;
+}
+
+//-----------------------------------------------
+/**
+ * Decrements products value by 1 and prints it
+ */
+
+function decrement(e) {
+  const id = e.target.dataset.id;
+
+  if (mushrooms[id].amount < 1) {
+    return;
+  }
+  mushrooms[id].amount -= 1;
+  const inputField = document.querySelector(`#amount-${id}`);
+  inputField.value = mushrooms[id].amount;
+}
+
+//------------------------------------------------
 
 /**
  * Toggle dark/light mode
