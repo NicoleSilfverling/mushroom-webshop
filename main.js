@@ -5,6 +5,10 @@ const productContainer = document.querySelector("#productContainer");
 const toggleTheme = document.querySelector("#toggleThemeBtn");
 toggleTheme.addEventListener("click", toggleDarkLightMode);
 let isThemeDark = false;
+
+const basketContainer = document.querySelector("#basket");
+let basket = [];
+
 const mushrooms = [
   {
     id: 0,
@@ -45,6 +49,7 @@ const mushrooms = [
 ];
 
 printProducts();
+printBasket();
 
 //---------------------------------------------------------------
 
@@ -87,6 +92,7 @@ function increment(e) {
   mushrooms[id].amount += 1;
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = mushrooms[id].amount;
+  printBasket();
 }
 
 //-----------------------------------------------
@@ -103,6 +109,23 @@ function decrement(e) {
   mushrooms[id].amount -= 1;
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = mushrooms[id].amount;
+  printBasket();
+}
+
+//------------------------------------------------
+
+/**
+ * Print basket
+ * @todo save items in array
+ */
+
+function printBasket() {
+  basketContainer.innerHTML = ""; //reset message
+  mushrooms.forEach((product) => {
+    if (product.amount > 0) {
+      basketContainer.innerHTML += `<li>${product.name} ${product.amount}</li>`;
+    }
+  });
 }
 
 //------------------------------------------------
