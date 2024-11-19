@@ -1,8 +1,10 @@
 import "./sass/style.scss";
 
 const productContainer = document.querySelector("#productContainer");
-console.log(productContainer);
 
+const toggleTheme = document.querySelector("#toggleThemeBtn");
+toggleTheme.addEventListener("click", toggleDarkLightMode);
+let isThemeDark = false;
 const mushrooms = [
   {
     id: 0,
@@ -11,7 +13,7 @@ const mushrooms = [
     category: "Matsvamp",
     rating: 5,
     img: {
-      src: "", //img src
+      src: "/mushroom.png",
       alt: "Kantarell",
     },
   },
@@ -22,7 +24,7 @@ const mushrooms = [
     category: "Giftig",
     rating: 1,
     img: {
-      src: "", //img src
+      src: "/mushroom.png",
       alt: "Flugsvamp",
     },
   },
@@ -33,23 +35,44 @@ const mushrooms = [
     category: "Prydnad",
     rating: 4,
     img: {
-      src: "", //img src
+      src: "/mushroom.png",
       alt: "Discokula formad som en svamp",
     },
   },
 ];
 
+printProducts();
+
+//---------------------------------------------------------------
+
+/**
+ * Prints all products
+ */
 function printProducts() {
   mushrooms.forEach((mushroom) => {
     console.log(mushroom);
     productContainer.innerHTML += `
         <article class="product-card">
-          <h4>${mushroom.name}</h4>
-          <p>${mushroom.price} kr</p>
+          <img src=${mushroom.img.src} alt=${mushroom.img.alt}>
+          <h2>${mushroom.name}</h2>
+          <h4>${mushroom.price} kr</h4>
           <p>Rating: ${mushroom.rating}</p>
+          <button>-</button>
+          <button>+</button>
         </article>
       `;
   });
 }
+//---------------------------------------------------------------
 
-printProducts();
+/**
+ * Toggle dark/light mode
+ */
+function toggleDarkLightMode() {
+  isThemeDark = !isThemeDark;
+  document.body.classList.toggle("dark-mode");
+
+  isThemeDark
+    ? (toggleTheme.innerHTML = "Light mode")
+    : (toggleTheme.innerHTML = "Dark mode");
+}

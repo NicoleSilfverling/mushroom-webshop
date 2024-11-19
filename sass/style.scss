@@ -1,7 +1,81 @@
 @use 'reset';
 
-.product-card{
-  border: 5px solid green;
-  border-radius: 5px;
-  margin: 5px;
+:root {
+  --background: #F5F8F1;
+  --primary-accent: #4B7A47;
+  --secondary-accent: #87A985;
+  --text-primary: #3A4A3A;
+  --text-secondary: #5E6E5E;
+  --header-footer-bg: #DDE4D0;
+  --success: #6BA072;
+  --warning: #CC7722;
+  --card-bg: #FFFFFF;
+}
+
+/* Dark Mode Colors */
+.dark-mode {
+  --background: #1F2A20;
+  --primary-accent: #5F8765;
+  --secondary-accent: #7F9D7F;
+  --text-primary: #E5EDE0;
+  --text-secondary: #A3B0A3;
+  --header-footer-bg: #2D3A2D;
+  --success: #6BA072;
+  --warning: #CC7722;
+  --card-bg: #2D3A2D;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+button{
+  background-color: var(--primary-accent);
+  color: #FFF;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover{
+  background-color: var(--secondary-accent);
+}
+
+.product-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  // overflow: hidden;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+  color: var(--text-primary);
+
+  img{
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  h2{
+    font-size: 1.2em;
+    margin: 15px 0 10px;
+  }
+  h4{
+    font-size: 1.1em;
+    color: var(--primary-accent);
+    margin-bottom: 15px;
+  }
+  p{
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+  }
 }
