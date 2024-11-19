@@ -13,7 +13,7 @@ const mushrooms = [
     category: "Matsvamp",
     rating: 5,
     img: {
-      src: "/mushroom.png",
+      src: "src/assets/images/chanterelle-mushroom.jpg",
       alt: "Kantarell",
     },
   },
@@ -24,7 +24,7 @@ const mushrooms = [
     category: "Giftig",
     rating: 1,
     img: {
-      src: "/mushroom.png",
+      src: "src/assets/images/fly-agaric-mushroom.jpg",
       alt: "Flugsvamp",
     },
   },
@@ -35,7 +35,7 @@ const mushrooms = [
     category: "Prydnad",
     rating: 4,
     img: {
-      src: "/mushroom.png",
+      src: "/src/assets/images/discoball-mushroom.jpg",
       alt: "Discokula formad som en svamp",
     },
   },
