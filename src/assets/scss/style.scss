@@ -42,6 +42,19 @@ header, footer {
   font-size: 1.5em;
   color: var(--text-primary);
 }
+header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  .basket-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+}
+
 button{
   background-color: var(--primary-accent);
   color: #FFF;
@@ -70,7 +83,10 @@ button:hover{
     height: auto;
     border-radius: 8px;
   }
-
+  button{
+    width: 40px;
+    height: 40px;
+  }
   h2{
     font-size: 1.2em;
     margin: 15px 0 10px;
@@ -86,3 +102,7 @@ button:hover{
     margin-bottom: 15px;
   }
 }
+
+
+
+
