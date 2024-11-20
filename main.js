@@ -19,7 +19,7 @@ const products = [
     rating: 5,
     amount: 0,
     img: {
-      src: "src/assets/images/chanterelle-mushroom.jpg",
+      src: "src/assets/images/products/chanterelle-mushroom.jpg",
       alt: "Kantarell",
     },
   },
@@ -28,10 +28,10 @@ const products = [
     name: "Flugsvamp",
     price: 1000,
     category: "Giftig",
-    rating: 1.3,
+    rating: 0.3,
     amount: 0,
     img: {
-      src: "src/assets/images/fly-agaric-mushroom.jpg",
+      src: "src/assets/images/products/fly-agaric-mushroom.jpg",
       alt: "Flugsvamp",
     },
   },
@@ -39,12 +39,96 @@ const products = [
     id: 2,
     name: "Discosvamp",
     price: 150,
-    category: "Prydnad",
+    category: "Inredning",
     rating: 4,
     amount: 0,
     img: {
-      src: "/src/assets/images/discoball-mushroom.jpg",
+      src: "/src/assets/images/products/discoball-mushroom.jpg",
       alt: "Discokula formad som en svamp",
+    },
+  },
+  {
+    id: 3,
+    name: "Portobello",
+    price: 100,
+    category: "Matsvamp",
+    rating: 5,
+    amount: 0,
+    img: {
+      src: "src/assets/images/products/portobello.jpg",
+      alt: "Portobello",
+    },
+  },
+  {
+    id: 4,
+    name: "Fjällskivling",
+    price: 30,
+    category: "Matsvamp",
+    rating: 1.3,
+    amount: 0,
+    img: {
+      src: "src/assets/images/products/parasol-mushroom.jpg",
+      alt: "Fjällskivling",
+    },
+  },
+  {
+    id: 5,
+    name: "Champinjon",
+    price: 150,
+    category: "Matsvamp",
+    rating: 4,
+    amount: 0,
+    img: {
+      src: "/src/assets/images/products/button-mushroom.jpg",
+      alt: "Champinjon",
+    },
+  },
+  {
+    id: 6,
+    name: "Korg",
+    price: 675,
+    category: "Verktyg och tillbehör",
+    rating: 5,
+    amount: 0,
+    img: {
+      src: "src/assets/images/products/mushroom-basket.webp",
+      alt: "Korg",
+    },
+  },
+  {
+    id: 7,
+    name: "Julkula",
+    price: 299,
+    category: "Inredning",
+    rating: 4.3,
+    amount: 0,
+    img: {
+      src: "src/assets/images/products/christmas-mushroom.jpg",
+      alt: "Julkula formad som en flugsvamp",
+    },
+  },
+  {
+    id: 8,
+    name: "Tvättsvamp",
+    price: 25,
+    category: "Verktyg och tillbehör",
+    rating: 3,
+    amount: 0,
+    img: {
+      src: "/src/assets/images/products/cleaning-sponge.jpg",
+      alt: "Tvättsvamp",
+    },
+  },
+  {
+    id: 9,
+    name: "Svampkniv",
+    price: 300,
+    category: "Verktyg och tillbehör",
+    rating: 4.5,
+    amount: 0,
+    img: {
+      src: "/src/assets/images/products/mushroom-knife.webp",
+      alt: "Svampkniv med inbyggd borste",
     },
   },
 ];
@@ -137,6 +221,7 @@ function printAndAddToCart() {
   cart.forEach((product) => {
     cartContainer.innerHTML += `
       <div>
+       <img src=${product.img.src} alt=${product.img.alt} class="cartImg">
         ${product.name}: ${product.amount} st - ${
       product.amount * product.price
     } kr
@@ -169,11 +254,11 @@ function printRating(rating) {
 
   //floor removes decimal
   for (let index = 0; index < Math.floor(rating); index++) {
-    starsRating += `<img src="./src/assets/images/star.png" alt="rating star">`;
+    starsRating += `<img src="./src/assets/images/icons/star.png" alt="rating star">`;
   }
   if (rating % 1 != 0) {
     // if decimal add halfstar
-    starsRating += `<img src="./src/assets/images/star-half-empty.png" alt="rating star half empty">`;
+    starsRating += `<img src="./src/assets/images/icons/star-half-empty.png" alt="rating star half empty">`;
   }
   return starsRating;
 }

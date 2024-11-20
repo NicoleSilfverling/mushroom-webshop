@@ -123,12 +123,15 @@ input[type=number] {
   }
 }
 
-
-
 .rating-icon-container{
   height: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   color: var(--primary-accent);
+}
+
+.cartImg{
+  height: 40px;
+  width: auto;
 }
