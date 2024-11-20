@@ -58,19 +58,19 @@ printAndAddToCart();
  * Prints all products
  */
 function printProducts() {
-  products.forEach((mushroom, index) => {
-    console.log(mushroom);
+  products.forEach((product, index) => {
+    console.log(product);
     productContainer.innerHTML += `
         <article class="product-card">
-          <img src=${mushroom.img.src} alt=${mushroom.img.alt}>
-          <h2>${mushroom.name}</h2>
-          <h4>${mushroom.price} kr</h4>
-          <p>Rating: ${mushroom.rating}</p>
-          <div id="ratingId" class="rating-icon-container"> ${rating(
-            mushroom.rating
+          <img src=${product.img.src} alt=${product.img.alt}>
+          <h2>${product.name}</h2>
+          <h4>${product.price} kr</h4>
+          <p>Betyg: ${product.rating}</p>
+          <div id="ratingId" class="rating-icon-container"> ${printRating(
+            product.rating
           )}</div>
           <button class="decrement" data-id="${index}">-</button>
-          <input type="number" id="amount-${index}" value="${mushroom.amount}">
+          <input type="number" id="amount-${index}" value="${product.amount}">
           <button class="increment" data-id="${index}">+</button>
         </article>
       `;
@@ -155,17 +155,16 @@ function toggleDarkLightMode() {
   document.body.classList.toggle("dark-mode");
 
   isThemeDark
-    ? (toggleTheme.innerHTML = "Light mode")
-    : (toggleTheme.innerHTML = "Dark mode");
+    ? (toggleTheme.innerHTML = "Ljust läge")
+    : (toggleTheme.innerHTML = "Mörkt läge");
 }
 
 //------------------------------------------------
 
 /**
- * Rating
- * @todo change emojis to icons, add halfstar function
+ * Prints rating with star icons
  */
-function rating(rating) {
+function printRating(rating) {
   starsRating = "";
 
   //floor removes decimal
