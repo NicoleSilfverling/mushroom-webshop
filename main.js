@@ -1,4 +1,4 @@
-import "./src/assets/scss/style.scss";
+import "/src/assets/scss/style.scss";
 
 const productContainer = document.querySelector("#productContainer");
 
