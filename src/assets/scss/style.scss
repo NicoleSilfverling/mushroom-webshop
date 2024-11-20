@@ -94,11 +94,11 @@ input[type=number] {
   padding: 20px;
   color: var(--text-primary);
 
-  img{
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
+  // img{
+  //   width: 100%;
+  //   height: auto;
+  //   border-radius: 8px;
+  // }
   button{
     width: 40px;
     height: 40px;
@@ -125,4 +125,10 @@ input[type=number] {
 
 
 
-
+.rating-icon-container{
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: var(--primary-accent);
+}

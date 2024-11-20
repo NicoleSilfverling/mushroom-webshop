@@ -6,10 +6,11 @@ const toggleTheme = document.querySelector("#toggleThemeBtn");
 toggleTheme.addEventListener("click", toggleDarkLightMode);
 let isThemeDark = false;
 
-const basketContainer = document.querySelector("#basket");
-let basket = [];
+const cartContainer = document.querySelector("#cart");
 
-const mushrooms = [
+let starsRating = "";
+
+const products = [
   {
     id: 0,
     name: "Kantarell",
@@ -27,7 +28,7 @@ const mushrooms = [
     name: "Flugsvamp",
     price: 1000,
     category: "Giftig",
-    rating: 1,
+    rating: 1.3,
     amount: 0,
     img: {
       src: "src/assets/images/fly-agaric-mushroom.jpg",
@@ -49,7 +50,7 @@ const mushrooms = [
 ];
 
 printProducts();
-printBasket();
+printAndAddToCart();
 
 //---------------------------------------------------------------
 
@@ -57,7 +58,7 @@ printBasket();
  * Prints all products
  */
 function printProducts() {
-  mushrooms.forEach((mushroom, index) => {
+  products.forEach((mushroom, index) => {
     console.log(mushroom);
     productContainer.innerHTML += `
         <article class="product-card">
@@ -65,13 +66,15 @@ function printProducts() {
           <h2>${mushroom.name}</h2>
           <h4>${mushroom.price} kr</h4>
           <p>Rating: ${mushroom.rating}</p>
+          <div id="ratingId" class="rating-icon-container"> ${rating(
+            mushroom.rating
+          )}</div>
           <button class="decrement" data-id="${index}">-</button>
           <input type="number" id="amount-${index}" value="${mushroom.amount}">
           <button class="increment" data-id="${index}">+</button>
         </article>
       `;
   });
-
   const incrementBtns = document.querySelectorAll("button.increment");
   const decrementBtns = document.querySelectorAll("button.decrement");
 
@@ -89,10 +92,10 @@ function printProducts() {
  */
 function increment(e) {
   const id = e.target.dataset.id;
-  mushrooms[id].amount += 1;
+  products[id].amount += 1;
   const inputField = document.querySelector(`#amount-${id}`);
-  inputField.value = mushrooms[id].amount;
-  printBasket();
+  inputField.value = products[id].amount;
+  printAndAddToCart();
 }
 
 //-----------------------------------------------
@@ -103,28 +106,42 @@ function increment(e) {
 function decrement(e) {
   const id = e.target.dataset.id;
 
-  if (mushrooms[id].amount < 1) {
+  if (products[id].amount < 1) {
     return;
   }
-  mushrooms[id].amount -= 1;
+  products[id].amount -= 1;
   const inputField = document.querySelector(`#amount-${id}`);
-  inputField.value = mushrooms[id].amount;
-  printBasket();
+  inputField.value = products[id].amount;
+  printAndAddToCart();
 }
 
 //------------------------------------------------
 
 /**
  * Print basket
- * @todo save items in array
+ *
+ * @todo Print carts total price
+ *
  */
 
-function printBasket() {
-  basketContainer.innerHTML = ""; //reset message
-  mushrooms.forEach((product) => {
+function printAndAddToCart() {
+  const cart = [];
+
+  products.forEach((product) => {
     if (product.amount > 0) {
-      basketContainer.innerHTML += `<li>${product.name} ${product.amount}</li>`;
+      cart.push(product);
     }
+  });
+  cartContainer.innerHTML = "";
+
+  cart.forEach((product) => {
+    cartContainer.innerHTML += `
+      <div>
+        ${product.name}: ${product.amount} st - ${
+      product.amount * product.price
+    } kr
+      </div>
+    `;
   });
 }
 
@@ -140,4 +157,24 @@ function toggleDarkLightMode() {
   isThemeDark
     ? (toggleTheme.innerHTML = "Light mode")
     : (toggleTheme.innerHTML = "Dark mode");
+}
+
+//------------------------------------------------
+
+/**
+ * Rating
+ * @todo change emojis to icons, add halfstar function
+ */
+function rating(rating) {
+  starsRating = "";
+
+  //floor removes decimal
+  for (let index = 0; index < Math.floor(rating); index++) {
+    starsRating += `<img src="./src/assets/images/star.png" alt="rating star">`;
+  }
+  if (rating % 1 != 0) {
+    // if decimal add halfstar
+    starsRating += `<img src="./src/assets/images/star-half-empty.png" alt="rating star half empty">`;
+  }
+  return starsRating;
 }
