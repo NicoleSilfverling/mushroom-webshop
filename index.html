@@ -19,14 +19,19 @@
     <button id="toggleThemeBtn">Mörkt läge</button>
     <h1>Produkter</h1>
     <div id="productContainer" class="product-grid"></div>
-    <div>
-      <h4>Kundkorg</h4>
-      <div id="cart"></div>
+    <div class="cart">
+      <h2>Kundkorg</h2>
+      <div class="items">
+        <div id="cartItems"></div>
+      </div>
+      <div class="summary">
+        <p>Totalt:</p>
+        <div id="cartSummary"></div>
+      </div>
     </div>
     <footer>
       © 2024 Svamplycka.
     </footer>
-
     <script type="module" src="main.js"></script>
   </body>
 </html>

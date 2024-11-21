@@ -6,7 +6,8 @@ const toggleTheme = document.querySelector("#toggleThemeBtn");
 toggleTheme.addEventListener("click", toggleDarkLightMode);
 let isThemeDark = false;
 
-const cartContainer = document.querySelector("#cart");
+const cartContainer = document.querySelector("#cartItems");
+const cartSummary = document.querySelector("#cartSummary");
 
 let starsRating = "";
 
@@ -143,7 +144,6 @@ printAndAddToCart();
  */
 function printProducts() {
   products.forEach((product, index) => {
-    console.log(product);
     productContainer.innerHTML += `
         <article class="product-card">
           <img src=${product.img.src} alt=${product.img.alt}>
@@ -210,24 +210,31 @@ function decrement(e) {
 
 function printAndAddToCart() {
   const cart = [];
+  let totalPrice = 0;
 
   products.forEach((product) => {
     if (product.amount > 0) {
       cart.push(product);
+      totalPrice += product.amount * product.price;
     }
   });
   cartContainer.innerHTML = "";
 
   cart.forEach((product) => {
     cartContainer.innerHTML += `
-      <div>
-       <img src=${product.img.src} alt=${product.img.alt} class="cartImg">
-        ${product.name}: ${product.amount} st - ${
-      product.amount * product.price
-    } kr
+     <div class="item">
+        <img src=${product.img.src} alt=${product.img.alt}>
+        <div class="details">
+          <h3>${product.name}</h3>
+          <p class="price">${product.amount * product.price} kr</p>
+          <p class="quantity">Antal: ${product.amount}</p>
+        </div>
       </div>
     `;
   });
+  cartSummary.innerHTML = `
+          <p class="total-price">${totalPrice}</p>
+  `;
 }
 
 //------------------------------------------------
