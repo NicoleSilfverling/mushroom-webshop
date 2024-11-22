@@ -1,17 +1,5 @@
 import "./scss/style.scss";
 const cart = [];
-let totalPrice = 0;
-const productContainer = document.querySelector("#productContainer");
-
-const toggleTheme = document.querySelector("#toggleThemeBtn");
-toggleTheme.addEventListener("click", toggleDarkLightMode);
-let isThemeDark = false;
-
-const cartContainer = document.querySelector("#cartItems");
-const cartSummary = document.querySelector("#cartSummary");
-
-let starsRating = "";
-
 const products = [
   {
     id: 0,
@@ -134,6 +122,19 @@ const products = [
     },
   },
 ];
+let totalPrice = 0;
+let starsRating = "";
+
+const productContainer = document.querySelector("#productContainer");
+
+const toggleTheme = document.querySelector("#toggleThemeBtn");
+toggleTheme.addEventListener("click", toggleDarkLightMode);
+let isThemeDark = false;
+
+const cartContainer = document.querySelector("#cartItems");
+const cartSummary = document.querySelector("#cartSummary");
+const buyBtn = document.querySelector("#buyBtn");
+buyBtn.addEventListener("click", printPurchaseConfirmation);
 
 printProducts();
 
