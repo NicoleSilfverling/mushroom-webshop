@@ -1,5 +1,6 @@
 import "./scss/style.scss";
-
+const cart = [];
+let totalPrice = 0;
 const productContainer = document.querySelector("#productContainer");
 
 const toggleTheme = document.querySelector("#toggleThemeBtn");
@@ -135,7 +136,6 @@ const products = [
 ];
 
 printProducts();
-printAndAddToCart();
 
 //---------------------------------------------------------------
 
@@ -179,7 +179,8 @@ function increment(e) {
   products[id].amount += 1;
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = products[id].amount;
-  printAndAddToCart();
+  updateCart();
+  printCart();
 }
 
 //-----------------------------------------------
@@ -196,21 +197,14 @@ function decrement(e) {
   products[id].amount -= 1;
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = products[id].amount;
-  printAndAddToCart();
+  updateCart();
+  printCart();
 }
-
 //------------------------------------------------
 
-/**
- * Print basket
- *
- * @todo Print carts total price
- *
- */
-
-function printAndAddToCart() {
-  const cart = [];
-  let totalPrice = 0;
+function updateCart() {
+  cart.length = 0;
+  totalPrice = 0;
 
   products.forEach((product) => {
     if (product.amount > 0) {
@@ -218,6 +212,9 @@ function printAndAddToCart() {
       totalPrice += product.amount * product.price;
     }
   });
+}
+
+function printCart() {
   cartContainer.innerHTML = "";
 
   cart.forEach((product) => {
@@ -235,6 +232,18 @@ function printAndAddToCart() {
   cartSummary.innerHTML = `
           <p class="total-price">${totalPrice}</p>
   `;
+}
+
+//------------------------------------------------
+
+/**
+ * Purchase confirmation
+ */
+
+function printPurchaseConfirmation() {
+  console.log("woho purchase made!");
+  updateCart();
+  console.table(cart);
 }
 
 //------------------------------------------------
