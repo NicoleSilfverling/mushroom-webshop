@@ -20,7 +20,7 @@ const products = [
     rating: 5,
     amount: 0,
     img: {
-      src: "assets/images/products/chanterelle-mushroom.jpg",
+      src: "./assets/images/products/chanterelle-mushroom.jpg",
       alt: "Kantarell",
     },
   },
@@ -32,7 +32,7 @@ const products = [
     rating: 0.3,
     amount: 0,
     img: {
-      src: "assets/images/products/fly-agaric-mushroom.jpg",
+      src: "./assets/images/products/fly-agaric-mushroom.jpg",
       alt: "Flugsvamp",
     },
   },
@@ -44,7 +44,7 @@ const products = [
     rating: 4,
     amount: 0,
     img: {
-      src: "assets/images/products/discoball-mushroom.jpg",
+      src: "./assets/images/products/discoball-mushroom.jpg",
       alt: "Discokula formad som en svamp",
     },
   },
@@ -56,7 +56,7 @@ const products = [
     rating: 5,
     amount: 0,
     img: {
-      src: "assets/images/products/portobello.jpg",
+      src: "./assets/images/products/portobello.jpg",
       alt: "Portobello",
     },
   },
@@ -68,7 +68,7 @@ const products = [
     rating: 1.3,
     amount: 0,
     img: {
-      src: "assets/images/products/parasol-mushroom.jpg",
+      src: "./assets/images/products/parasol-mushroom.jpg",
       alt: "Fjällskivling",
     },
   },
@@ -80,7 +80,7 @@ const products = [
     rating: 4,
     amount: 0,
     img: {
-      src: "assets/images/products/button-mushroom.jpg",
+      src: "./assets/images/products/button-mushroom.jpg",
       alt: "Champinjon",
     },
   },
@@ -92,7 +92,7 @@ const products = [
     rating: 5,
     amount: 0,
     img: {
-      src: "assets/images/products/mushroom-basket.webp",
+      src: "./assets/images/products/mushroom-basket.webp",
       alt: "Korg",
     },
   },
@@ -104,7 +104,7 @@ const products = [
     rating: 4.3,
     amount: 0,
     img: {
-      src: "assets/images/products/christmas-mushroom.jpg",
+      src: "./assets/images/products/christmas-mushroom.jpg",
       alt: "Julkula formad som en flugsvamp",
     },
   },
@@ -116,7 +116,7 @@ const products = [
     rating: 3,
     amount: 0,
     img: {
-      src: "assets/images/products/cleaning-sponge.jpg",
+      src: "./assets/images/products/cleaning-sponge.jpg",
       alt: "Tvättsvamp",
     },
   },
@@ -128,7 +128,7 @@ const products = [
     rating: 4.5,
     amount: 0,
     img: {
-      src: "assets/images/products/mushroom-knife.webp",
+      src: "./assets/images/products/mushroom-knife.webp",
       alt: "Svampkniv med inbyggd borste",
     },
   },
