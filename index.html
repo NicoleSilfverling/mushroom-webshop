@@ -16,7 +16,16 @@
         </a>
       </div>
     </header>
-    <button id="toggleThemeBtn">Mörkt läge</button>
+    <div>
+      <button id="toggleThemeBtn">Mörkt läge</button>
+      <select name="sort" id="sort">
+        <option value="">Välj sortering</option>
+        <option value="lowestPrice">Lägsta pris</option>
+        <option value="highestPrice">Högsta pris</option>
+        <option value="lowestRating">Lägsta betyg</option>
+        <option value="highestRating">Högsta betyg</option>
+      </select>
+    </div>
     <h1>Produkter</h1>
     <div id="productContainer" class="product-grid"></div>
     <div class="cart" id="cart">

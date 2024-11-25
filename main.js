@@ -136,6 +136,9 @@ const cartSummary = document.querySelector("#cartSummary");
 const buyBtn = document.querySelector("#buyBtn");
 buyBtn.addEventListener("click", printPurchaseConfirmation);
 
+const sort = document.querySelector("#sort");
+sort.addEventListener("change", sortProducts);
+
 printProducts();
 
 //---------------------------------------------------------------
@@ -144,6 +147,7 @@ printProducts();
  * Prints all products
  */
 function printProducts() {
+  productContainer.innerHTML = "";
   products.forEach((product, index) => {
     productContainer.innerHTML += `
         <article class="product-card">
@@ -171,6 +175,27 @@ function printProducts() {
     });
   });
 }
+
+//--------------------------------------------------
+/**
+ * Sort products
+ */
+
+function sortProducts(e) {
+  products.sort((product1, product2) => {
+    if (e.target.value == "lowestPrice") {
+      return product1.price - product2.price;
+    } else if (e.target.value == "highestPrice") {
+      return product2.price - product1.price;
+    } else if (e.target.value == "lowestRating") {
+      return product1.rating - product2.rating;
+    } else if (e.target.value == "highestRating") {
+      return product2.rating - product1.rating;
+    }
+  });
+  printProducts();
+}
+
 //--------------------------------------------------
 /**
  * Increments products value by 1 and prints it
