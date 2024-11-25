@@ -183,14 +183,17 @@ function printProducts() {
 
 function sortProducts(e) {
   products.sort((product1, product2) => {
-    if (e.target.value == "lowestPrice") {
-      return product1.price - product2.price;
-    } else if (e.target.value == "highestPrice") {
-      return product2.price - product1.price;
-    } else if (e.target.value == "lowestRating") {
-      return product1.rating - product2.rating;
-    } else if (e.target.value == "highestRating") {
-      return product2.rating - product1.rating;
+    switch (e.target.value) {
+      case "lowestPrice":
+        return product1.price - product2.price;
+      case "highestPrice":
+        return product2.price - product1.price;
+      case "lowestRating":
+        return product1.rating - product2.rating;
+      case "highestRating":
+        return product2.rating - product1.rating;
+      default:
+        break;
     }
   });
   printProducts();
