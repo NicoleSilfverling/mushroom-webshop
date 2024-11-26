@@ -122,6 +122,7 @@ const products = [
     },
   },
 ];
+let filteredProducts = [...products];
 let totalPrice = 0;
 let starsRating = "";
 
@@ -151,7 +152,7 @@ printProducts();
  */
 function printProducts() {
   productContainer.innerHTML = "";
-  products.forEach((product, index) => {
+  filteredProducts.forEach((product, index) => {
     productContainer.innerHTML += `
         <article class="product-card">
           <img src=${product.img.src} alt=${product.img.alt}>
@@ -185,7 +186,7 @@ function printProducts() {
  */
 
 function sortProducts(e) {
-  products.sort((product1, product2) => {
+  filteredProducts.sort((product1, product2) => {
     switch (e.target.value) {
       case "lowestPrice":
         return product1.price - product2.price;
@@ -208,12 +209,15 @@ function sortProducts(e) {
  */
 
 function filterProducts(e) {
-  console.log("filter: " + e.target.value);
+  if (e.target.value === "") {
+    filteredProducts = [...products];
+  } else {
+    filteredProducts = products.filter(
+      (product) => product.category === e.target.value
+    );
+  }
 
-  const filteredProducts = products.filter(
-    (product) => product.category === e.target.value
-  );
-  console.table(filteredProducts);
+  printProducts();
 }
 
 //--------------------------------------------------
