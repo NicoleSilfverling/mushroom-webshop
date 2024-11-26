@@ -5,7 +5,7 @@ const products = [
     id: 0,
     name: "Kantarell",
     price: 100,
-    category: "Matsvamp",
+    category: "food",
     rating: 5,
     amount: 0,
     img: {
@@ -17,7 +17,7 @@ const products = [
     id: 1,
     name: "Flugsvamp",
     price: 1000,
-    category: "Giftig",
+    category: "poisonous",
     rating: 0.3,
     amount: 0,
     img: {
@@ -29,7 +29,7 @@ const products = [
     id: 2,
     name: "Discosvamp",
     price: 150,
-    category: "Inredning",
+    category: "decor",
     rating: 4,
     amount: 0,
     img: {
@@ -41,7 +41,7 @@ const products = [
     id: 3,
     name: "Portobello",
     price: 100,
-    category: "Matsvamp",
+    category: "food",
     rating: 5,
     amount: 0,
     img: {
@@ -53,7 +53,7 @@ const products = [
     id: 4,
     name: "Fjällskivling",
     price: 30,
-    category: "Matsvamp",
+    category: "food",
     rating: 1.3,
     amount: 0,
     img: {
@@ -65,7 +65,7 @@ const products = [
     id: 5,
     name: "Champinjon",
     price: 150,
-    category: "Matsvamp",
+    category: "food",
     rating: 4,
     amount: 0,
     img: {
@@ -77,7 +77,7 @@ const products = [
     id: 6,
     name: "Korg",
     price: 675,
-    category: "Verktyg och tillbehör",
+    category: "tools",
     rating: 5,
     amount: 0,
     img: {
@@ -89,7 +89,7 @@ const products = [
     id: 7,
     name: "Julkula",
     price: 299,
-    category: "Inredning",
+    category: "decor",
     rating: 4.3,
     amount: 0,
     img: {
@@ -101,7 +101,7 @@ const products = [
     id: 8,
     name: "Tvättsvamp",
     price: 25,
-    category: "Verktyg och tillbehör",
+    category: "tools",
     rating: 3,
     amount: 0,
     img: {
@@ -113,7 +113,7 @@ const products = [
     id: 9,
     name: "Svampkniv",
     price: 300,
-    category: "Verktyg och tillbehör",
+    category: "tools",
     rating: 4.5,
     amount: 0,
     img: {
@@ -138,6 +138,9 @@ buyBtn.addEventListener("click", printPurchaseConfirmation);
 
 const sort = document.querySelector("#sort");
 sort.addEventListener("change", sortProducts);
+
+const filter = document.querySelector("#filter");
+filter.addEventListener("change", filterProducts);
 
 printProducts();
 
@@ -197,6 +200,20 @@ function sortProducts(e) {
     }
   });
   printProducts();
+}
+
+//--------------------------------------------------
+/**
+ * Filter products
+ */
+
+function filterProducts(e) {
+  console.log("filter: " + e.target.value);
+
+  const filteredProducts = products.filter(
+    (product) => product.category === e.target.value
+  );
+  console.table(filteredProducts);
 }
 
 //--------------------------------------------------
