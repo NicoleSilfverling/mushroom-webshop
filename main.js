@@ -162,9 +162,11 @@ function printProducts() {
           <div id="ratingId" class="rating-icon-container"> ${printRating(
             product.rating
           )}</div>
-          <button class="decrement" data-id="${index}">-</button>
-          <input type="number" id="amount-${index}" value="${product.amount}">
-          <button class="increment" data-id="${index}">+</button>
+          <button class="decrement" data-id="${product.id}">-</button>
+          <input type="number" id="amount-${product.id}" value="${
+      product.amount
+    }">
+          <button class="increment" data-id="${product.id}">+</button>
         </article>
       `;
   });
