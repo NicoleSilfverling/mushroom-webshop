@@ -192,14 +192,30 @@ function printProducts() {
 function sortProducts(e) {
   filteredProducts.sort((product1, product2) => {
     switch (e.target.value) {
-      case "lowestPrice":
+      case "ascPrice":
         return product1.price - product2.price;
-      case "highestPrice":
+      case "descPrice":
         return product2.price - product1.price;
-      case "lowestRating":
+      case "ascRating":
         return product1.rating - product2.rating;
-      case "highestRating":
+      case "descRating":
         return product2.rating - product1.rating;
+      case "ascName":
+        if (product1.name < product2.name) {
+          return -1;
+        }
+        if (product1.name > product2.name) {
+          return 1;
+        }
+        return 0;
+      case "descName":
+        if (product2.name < product1.name) {
+          return -1;
+        }
+        if (product2.name > product1.name) {
+          return 1;
+        }
+        return 0;
       default:
         break;
     }
