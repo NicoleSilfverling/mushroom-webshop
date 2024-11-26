@@ -124,6 +124,7 @@ const products = [
 ];
 let filteredProducts = [...products];
 let totalPrice = 0;
+let amountOfItemsInCart = 0;
 let starsRating = "";
 
 const productContainer = document.querySelector("#productContainer");
@@ -134,6 +135,7 @@ let isThemeDark = false;
 
 const cartContainer = document.querySelector("#cartItems");
 const cartSummary = document.querySelector("#cartSummary");
+const itemsInCart = document.querySelector("#itemsInCart");
 const buyBtn = document.querySelector("#buyBtn");
 buyBtn.addEventListener("click", printPurchaseConfirmation);
 
@@ -257,11 +259,13 @@ function decrement(e) {
 function updateCart() {
   cart.length = 0;
   totalPrice = 0;
+  amountOfItemsInCart = 0;
 
   products.forEach((product) => {
     if (product.amount > 0) {
       cart.push(product);
       totalPrice += product.amount * product.price;
+      amountOfItemsInCart += product.amount;
     }
   });
 }
@@ -284,6 +288,8 @@ function printCart() {
   cartSummary.innerHTML = `
           <p class="total-price">${totalPrice}</p>
   `;
+
+  itemsInCart.innerHTML = `<div class="items-in-cart">${amountOfItemsInCart}</div>`;
 }
 
 //------------------------------------------------
