@@ -164,23 +164,22 @@ function printProducts() {
           <div id="ratingId" class="rating-icon-container"> ${printRating(
             product.rating
           )}</div>
-          <button class="decrement" data-id="${product.id}">-</button>
+          <button class="productCount" data-id="decrease-${
+            product.id
+          }">-</button>
           <input type="number" id="amount-${product.id}" value="${
       product.amount
     }">
-          <button class="increment" data-id="${product.id}">+</button>
+          <button class="productCount" data-id="increase-${
+            product.id
+          }">+</button>
         </article>
       `;
   });
-  const incrementBtns = document.querySelectorAll("button.increment");
-  const decrementBtns = document.querySelectorAll("button.decrement");
+  const productCountBtns = document.querySelectorAll("button.productCount");
 
-  incrementBtns.forEach((btn) => {
-    btn.addEventListener("click", increment);
-
-    decrementBtns.forEach((btn) => {
-      btn.addEventListener("click", decrement);
-    });
+  productCountBtns.forEach((btn) => {
+    btn.addEventListener("click", increaseDecreaseProductCount);
   });
 }
 
@@ -242,34 +241,25 @@ function filterProducts(e) {
 
 //--------------------------------------------------
 /**
- * Increments products value by 1 and prints it
+ * Increase or decrease product count by 1
  */
-function increment(e) {
-  const id = e.target.dataset.id;
-  products[id].amount += 1;
-  const inputField = document.querySelector(`#amount-${id}`);
-  inputField.value = products[id].amount;
-  updateCart();
-  printCart();
-}
-
-//-----------------------------------------------
-/**
- * Decrements products value by 1 and prints it
- */
-
-function decrement(e) {
-  const id = e.target.dataset.id;
-
-  if (products[id].amount < 1) {
-    return;
+function increaseDecreaseProductCount(e) {
+  const stringId = e.target.dataset.id;
+  const id = stringId.replace(/^\D+-/, ""); //replace all non-digits and - with empty string
+  if (stringId.includes("increase")) {
+    products[id].amount += 1;
+  } else {
+    if (products[id].amount < 1) {
+      return;
+    }
+    products[id].amount -= 1;
   }
-  products[id].amount -= 1;
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = products[id].amount;
   updateCart();
   printCart();
 }
+
 //------------------------------------------------
 
 function updateCart() {
