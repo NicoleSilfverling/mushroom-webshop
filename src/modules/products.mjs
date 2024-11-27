@@ -1,0 +1,123 @@
+const products = [
+  {
+    id: 0,
+    name: "Kantarell",
+    price: 100,
+    category: "food",
+    rating: 5,
+    amount: 0,
+    img: {
+      src: "./products/chanterelle-mushroom.jpg",
+      alt: "Kantarell",
+    },
+  },
+  {
+    id: 1,
+    name: "Flugsvamp",
+    price: 1000,
+    category: "poisonous",
+    rating: 0.3,
+    amount: 0,
+    img: {
+      src: "./products/fly-agaric-mushroom.jpg",
+      alt: "Flugsvamp",
+    },
+  },
+  {
+    id: 2,
+    name: "Discosvamp",
+    price: 150,
+    category: "decor",
+    rating: 4,
+    amount: 0,
+    img: {
+      src: "./products/discoball-mushroom.jpg",
+      alt: "Discokula formad som en svamp",
+    },
+  },
+  {
+    id: 3,
+    name: "Portobello",
+    price: 100,
+    category: "food",
+    rating: 5,
+    amount: 0,
+    img: {
+      src: "./products/portobello.jpg",
+      alt: "Portobello",
+    },
+  },
+  {
+    id: 4,
+    name: "Fjällskivling",
+    price: 30,
+    category: "food",
+    rating: 1.3,
+    amount: 0,
+    img: {
+      src: "./products/parasol-mushroom.jpg",
+      alt: "Fjällskivling",
+    },
+  },
+  {
+    id: 5,
+    name: "Champinjon",
+    price: 150,
+    category: "food",
+    rating: 4,
+    amount: 0,
+    img: {
+      src: "./products/button-mushroom.jpg",
+      alt: "Champinjon",
+    },
+  },
+  {
+    id: 6,
+    name: "Korg",
+    price: 675,
+    category: "tools",
+    rating: 5,
+    amount: 0,
+    img: {
+      src: "./products/mushroom-basket.webp",
+      alt: "Korg",
+    },
+  },
+  {
+    id: 7,
+    name: "Julkula",
+    price: 299,
+    category: "decor",
+    rating: 4.3,
+    amount: 0,
+    img: {
+      src: "./products/christmas-mushroom.jpg",
+      alt: "Julkula formad som en flugsvamp",
+    },
+  },
+  {
+    id: 8,
+    name: "Tvättsvamp",
+    price: 25,
+    category: "tools",
+    rating: 3,
+    amount: 0,
+    img: {
+      src: "./products/cleaning-sponge.jpg",
+      alt: "Tvättsvamp",
+    },
+  },
+  {
+    id: 9,
+    name: "Svampkniv",
+    price: 300,
+    category: "tools",
+    rating: 4.5,
+    amount: 0,
+    img: {
+      src: "./products/mushroom-knife.webp",
+      alt: "Svampkniv med inbyggd borste",
+    },
+  },
+];
+export default products;
