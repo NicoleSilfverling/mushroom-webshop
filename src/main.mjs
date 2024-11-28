@@ -211,11 +211,11 @@ function printRating(rating) {
 
   //floor removes decimal
   for (let index = 0; index < Math.floor(rating); index++) {
-    starsRating += `<img src="./icons/star.png" alt="rating star">`;
+    starsRating += `<img src="./icons/star.png" alt="stjärna">`;
   }
   if (rating % 1 != 0) {
     // if decimal add halfstar
-    starsRating += `<img src="./icons/star-half-empty.png" alt="rating star half empty">`;
+    starsRating += `<img src="./icons/star-half-empty.png" alt="halv stjärna">`;
   }
   return starsRating;
 }

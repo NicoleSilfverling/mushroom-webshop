@@ -42,7 +42,7 @@ header, footer {
   font-size: 1.5em;
   color: var(--text-primary);
 }
-header{
+header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -50,12 +50,12 @@ header{
 
   .cart-icon {
     display: flex;
-    img{
+    img {
       width: 40px;
       height: 40px;
       cursor: pointer;
     }
-    .items-in-cart{
+    .items-in-cart {
       background-color: var(--primary-accent);
       color:#fff;
       height: 20px;
@@ -70,7 +70,7 @@ header{
   }
 }
 
-button{
+button {
   background-color: var(--primary-accent);
   color: #FFF;
   padding: 10px 15px;
@@ -79,7 +79,7 @@ button{
   cursor: pointer;
   font-weight: bold;
 }
-button:hover{
+button:hover {
   background-color: var(--secondary-accent);
 }
 
@@ -109,34 +109,34 @@ input[type=number] {
   padding: 20px;
   color: var(--text-primary);
 
-  img{
+  img {
     border-radius: 8px;
   }
-  button{
+  button {
     width: 40px;
     height: 40px;
   }
-  h2{
+  h2 {
     font-size: 1.2em;
     margin: 15px 0 10px;
   }
-  h4{
+  h4 {
     font-size: 1.1em;
     color: var(--primary-accent);
     margin-bottom: 15px;
   }
-  p{
+  p {
     font-size: 0.9em;
     color: var(--text-secondary);
     margin-bottom: 15px;
   }
-  input{
+  input {
     width: 40px;
     text-align: center;
   }
 }
 
-.rating-icon-container{
+.rating-icon-container {
   height: 20px;
   display: flex;
   flex-direction: row;
@@ -188,7 +188,7 @@ input[type=number] {
         .quantity {
           font-size: 0.9rem;
           margin: 5px 0;
-          color:var(--text-secondary);
+          color: var(--text-secondary);
         }
       }
 
@@ -220,15 +220,3 @@ input[type=number] {
 
   }
 }
-
-// .items-in-cart{
-//   background-color: var(--primary-accent);
-//   color:#fff;
-//   height: 30px;
-//   width: 30px;
-//   border-radius: 50%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   font-size: 1.1rem;
-// }
