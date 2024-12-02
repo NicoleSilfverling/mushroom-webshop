@@ -51,12 +51,18 @@
     </div>
     <!-- TODO add functionallity to the form -->
     <div id="checkout" class="hidden">
-      <form>
-        <label for="fname">Förnamn:</label><br>
-        <input type="text" id="fname" name="fname"><br>
-        <label for="lname">Efternamn:</label><br>
-        <input type="text" id="lname" name="lname"><br>
-        <label for="street">Gata:</label><br>
+      <form id="checkoutForm">
+        <label for="fname">
+          <span>Förnamn:</span><br>
+          <input type="text" id="fname" name="fname">
+          <div id="fname-error" class="error-container"></div><br>
+        </label><br>
+        <label for="lname">
+          <span>Efternamn:</span><br>
+          <input type="text" id="lname" name="lname">
+          <div id="lname-error" class="error-container"></div><br>
+        </label>
+        <!-- <label for="street">Gata:</label><br>
         <input type="text" id="street" name="street"><br>
         <label for="zip">Postnummer:</label><br>
         <input type="number" id="zip" name="zip"><br>
@@ -76,7 +82,8 @@
         <input type="checkbox" id="gdpr" name="gdpr"><br>
         <label for="newsletter">Nyhetsbrev:</label>
         <input type="checkbox" id="newsletter" name="newsletter" checked><br>
-        <input type="submit" value="Beställ">
+        -->
+        <input type="submit" value="Fortsätt till betalning"> 
       </form>
     </div>
        <footer>

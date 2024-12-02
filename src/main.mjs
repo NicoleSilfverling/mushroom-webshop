@@ -1,5 +1,7 @@
 import "./scss/style.scss";
 import products from "./modules/products.mjs";
+import { validateForm } from "./modules/form.mjs";
+
 const cart = [];
 let filteredProducts = [...products];
 let totalPrice = 0;
@@ -16,12 +18,15 @@ const buyBtn = document.querySelector("#buyBtn");
 const sort = document.querySelector("#sort");
 const filter = document.querySelector("#filter");
 const checkout = document.querySelector("#checkout");
+const checkoutForm = document.querySelector("#checkoutForm");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
 buyBtn.addEventListener("click", printPurchaseConfirmation);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
+// checkoutForm.addEventListener("submit", validateForm);
+checkoutForm.addEventListener("submit", (e) => validateForm(e, checkoutForm));
 
 printProducts();
 
