@@ -15,6 +15,7 @@ const itemsInCart = document.querySelector("#itemsInCart");
 const buyBtn = document.querySelector("#buyBtn");
 const sort = document.querySelector("#sort");
 const filter = document.querySelector("#filter");
+const checkout = document.querySelector("#checkout");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
@@ -182,9 +183,11 @@ function printCart() {
  */
 
 function printPurchaseConfirmation() {
-  console.log("woho purchase made!");
-  updateCart();
-  console.table(cart);
+  // console.log("woho purchase made!");
+  // updateCart();
+  // console.table(cart);
+  checkout.classList.remove("hidden");
+  checkout.scrollIntoView();
 }
 
 //------------------------------------------------
