@@ -85,6 +85,12 @@ button {
 button:hover {
   background-color: var(--secondary-accent);
 }
+button:disabled {
+  background-color: dimgrey;
+  color: #FFF;
+  opacity: 1;
+  cursor: default;
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

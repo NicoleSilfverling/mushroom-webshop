@@ -14,7 +14,7 @@ const toggleTheme = document.querySelector("#toggleThemeBtn");
 const cartContainer = document.querySelector("#cartItems");
 const cartSummary = document.querySelector("#cartSummary");
 const itemsInCart = document.querySelector("#itemsInCart");
-const buyBtn = document.querySelector("#buyBtn");
+const goToCheckoutBtn = document.querySelector("#goToCheckout");
 const sort = document.querySelector("#sort");
 const filter = document.querySelector("#filter");
 const checkout = document.querySelector("#checkout");
@@ -22,7 +22,7 @@ const checkoutForm = document.querySelector("#checkoutForm");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
-buyBtn.addEventListener("click", printPurchaseConfirmation);
+goToCheckoutBtn.addEventListener("click", printPurchaseConfirmation);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 // checkoutForm.addEventListener("submit", validateForm);
@@ -157,6 +157,9 @@ function updateCart() {
       amountOfItemsInCart += product.amount;
     }
   });
+  if (amountOfItemsInCart > 0) {
+    goToCheckoutBtn.removeAttribute("disabled"); // Enable functionality
+  }
 }
 
 function printCart() {
