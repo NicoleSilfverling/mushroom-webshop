@@ -26,7 +26,7 @@ goToCheckoutBtn.addEventListener("click", printPurchaseConfirmation);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 // checkoutForm.addEventListener("submit", validateForm);
-checkoutForm.addEventListener("submit", (e) => validateForm(e, checkoutForm));
+checkoutForm.addEventListener("submit", handleSubmit);
 
 printProducts();
 
@@ -159,6 +159,8 @@ function updateCart() {
   });
   if (amountOfItemsInCart > 0) {
     goToCheckoutBtn.removeAttribute("disabled"); // Enable functionality
+  } else {
+    goToCheckoutBtn.setAttribute("disabled", "");
   }
 }
 
@@ -186,8 +188,49 @@ function printCart() {
 
 //------------------------------------------------
 
+function handleSubmit(e) {
+  e.preventDefault(); //prevents page to reload on submit
+
+  const formData = new FormData(checkoutForm);
+
+  const errors = validateForm(formData);
+  printFormValidationErrors(errors);
+}
+
+//------------------------------------------------
+
+function printFormValidationErrors(errors) {
+  //Clear all printed error messages
+  const errorElements = document.querySelectorAll("[id$='-error']"); // select all with id that ends with "-error"
+  errorElements.forEach((error) => {
+    error.innerHTML = "";
+  });
+
+  // Select all inputs with potential error messages
+  const inputElements = document.querySelectorAll("[id$='-input']");
+
+  // Clear all error classes from inputs
+  inputElements.forEach((input) => {
+    input.classList.remove("input-error");
+  });
+
+  // Prints error message
+  Object.entries(errors).forEach(([field, message]) => {
+    const errorElement = document.querySelector(`#${field}-error`);
+    const input = document.querySelector(`#${field}-input`);
+
+    if (errorElement) {
+      errorElement.innerHTML = message;
+      input.classList.add("input-error");
+    }
+  });
+}
+
+//------------------------------------------------
+
 /**
  * Purchase confirmation
+ * TODO - should change name and/or content
  */
 
 function printPurchaseConfirmation() {

@@ -230,6 +230,6 @@ input[type=number] {
   }
 }
 
-.errorContainer {
-  color: var(--warning);
+.input-error {
+  border: 2px solid var(--warning);
 }
