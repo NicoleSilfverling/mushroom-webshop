@@ -199,7 +199,30 @@ function handleSubmit(e) {
 
 //------------------------------------------------
 
+/**
+ * Prints all form validation errors
+ * @param {*} errors
+ */
 function printFormValidationErrors(errors) {
+  clearPrintedErrors();
+
+  // Prints error message
+  Object.entries(errors).forEach(([field, message]) => {
+    const errorElement = document.querySelector(`#${field}-error`);
+    const input = document.querySelector(`#${field}-input`);
+
+    if (errorElement) {
+      errorElement.innerHTML = message;
+      input.classList.add("input-error");
+    }
+  });
+}
+//------------------------------------------------
+
+/**
+ * Clear all printed error messages and removes error css class
+ */
+function clearPrintedErrors() {
   //Clear all printed error messages
   const errorElements = document.querySelectorAll("[id$='-error']"); // select all with id that ends with "-error"
   errorElements.forEach((error) => {
@@ -212,17 +235,6 @@ function printFormValidationErrors(errors) {
   // Clear all error classes from inputs
   inputElements.forEach((input) => {
     input.classList.remove("input-error");
-  });
-
-  // Prints error message
-  Object.entries(errors).forEach(([field, message]) => {
-    const errorElement = document.querySelector(`#${field}-error`);
-    const input = document.querySelector(`#${field}-input`);
-
-    if (errorElement) {
-      errorElement.innerHTML = message;
-      input.classList.add("input-error");
-    }
   });
 }
 
