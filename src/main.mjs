@@ -25,7 +25,6 @@ toggleTheme.addEventListener("click", toggleDarkLightMode);
 goToCheckoutBtn.addEventListener("click", printPurchaseConfirmation);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
-// checkoutForm.addEventListener("submit", validateForm);
 checkoutForm.addEventListener("submit", handleSubmit);
 
 printProducts();
