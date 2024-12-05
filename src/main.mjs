@@ -19,10 +19,11 @@ const sort = document.querySelector("#sort");
 const filter = document.querySelector("#filter");
 const checkout = document.querySelector("#checkout");
 const checkoutForm = document.querySelector("#checkoutForm");
+const countDown = document.querySelector("#countDown");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
-goToCheckoutBtn.addEventListener("click", printPurchaseConfirmation);
+goToCheckoutBtn.addEventListener("click", goToCheckout);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", handleSubmit);
@@ -140,6 +141,7 @@ function increaseDecreaseProductCount(e) {
   inputField.value = products[id].amount;
   updateCart();
   printCart();
+  countDownOrderReset();
 }
 
 //------------------------------------------------
@@ -165,7 +167,6 @@ function updateCart() {
 
 function printCart() {
   cartContainer.innerHTML = "";
-
   cart.forEach((product) => {
     cartContainer.innerHTML += `
      <div class="item">
@@ -239,17 +240,66 @@ function clearPrintedErrors() {
 
 //------------------------------------------------
 
+function clearCartAndForms() {
+  //Clear form and error messages
+  checkoutForm.reset();
+  clearPrintedErrors();
+
+  // Remove products added to cart
+  products.forEach((product) => {
+    product.amount = 0;
+  });
+
+  // update and print
+  updateCart();
+  printProducts();
+  printCart();
+}
+//------------------------------------------------
+
 /**
- * Purchase confirmation
- * TODO - should change name and/or content
+ * Timer that empties cart and form if inactive for 15 mins
  */
 
-function printPurchaseConfirmation() {
-  // console.log("woho purchase made!");
-  // updateCart();
-  // console.table(cart);
+let timer;
+function countDownOrderReset() {
+  let sec = 0;
+  let min = 15;
+
+  if (timer) {
+    clearInterval(timer);
+  }
+
+  timer = setInterval(function () {
+    if (sec > 0) {
+      sec -= 1;
+    } else if (min > 0) {
+      sec = 59;
+      min -= 1;
+    }
+
+    countDown.innerHTML = `Tid kvar för att beställa: ${min}:${String(
+      sec
+    ).padStart(2, "0")}`;
+    if (amountOfItemsInCart === 0) {
+      clearInterval(timer);
+      countDown.innerHTML = "";
+    } else if (min === 0 && sec === 0) {
+      clearInterval(timer);
+      clearCartAndForms();
+      countDown.innerHTML = "Du var för långsam, korgen tömdes!";
+    }
+  }, 1000);
+}
+//------------------------------------------------
+/**
+ * Go to checkout
+ */
+
+function goToCheckout() {
   checkout.classList.remove("hidden");
   checkout.scrollIntoView();
+  countDownOrderReset(); // gives user 15 mins to finish order
 }
 
 //------------------------------------------------
