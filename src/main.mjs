@@ -8,11 +8,13 @@ let totalPrice = 0;
 let amountOfItemsInCart = 0;
 let starsRating = "";
 let isThemeDark = false;
+let discountMessages = [];
 
 const productContainer = document.querySelector("#productContainer");
 const toggleTheme = document.querySelector("#toggleThemeBtn");
 const cartContainer = document.querySelector("#cartItems");
 const cartSummary = document.querySelector("#cartSummary");
+const discountsContainer = document.querySelector("#discounts");
 const itemsInCart = document.querySelector("#itemsInCart");
 const goToCheckoutBtn = document.querySelector("#goToCheckout");
 const sort = document.querySelector("#sort");
@@ -206,6 +208,9 @@ function printCart() {
       </div>
     `;
   });
+  discountsContainer.innerHTML = discountMessages
+    .map((message) => `<p>${message}</p>`)
+    .join("");
   cartSummary.innerHTML = `
     <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
@@ -392,7 +397,7 @@ function applyDiscounts() {
   const day = today.getDay(); // 0 Sunday to 6 Saturday
   const hour = today.getHours();
 
-  let messages = []; // Stores all discount messages
+  discountMessages = []; // Stores all discount messages
 
   cart.forEach((product) => {
     // Check if we need to reset the price
@@ -406,19 +411,20 @@ function applyDiscounts() {
     if (day === 1 && hour < 10) {
       product.price = product.price * 0.9; // Apply 10% discount
 
-      if (!messages.includes("Måndagsrabatt: 10 % på hela beställningen")) {
-        messages.push("Måndagsrabatt: 10 % på hela beställningen");
+      if (
+        !discountMessages.includes("Måndagsrabatt: 10 % på hela beställningen")
+      ) {
+        discountMessages.push("Måndagsrabatt: 10 % på hela beställningen");
       }
     }
 
     // Discount if 10 or more
     if (product.amount >= 10) {
       product.price = product.price * 0.9; // Apply 10% discount
-      messages.push(`Mängdrabatt: 10 % på ${product.name}`);
+      discountMessages.push(`Mängdrabatt: 10 % på ${product.name}`);
     }
   });
-
-  return { messages }; // TODO - display the messages
+  console.log(discountMessages);
 }
 
 // Calculate shipping price

@@ -218,24 +218,22 @@ input[type=number] {
     flex-direction: column;
     gap: 10px;
     padding-top: 10px;
-    // border-top: 1px solid #f0f0f0;
 
     p {
-      margin: 0;
-
-      &:first-of-type {
-        font-size: 1.1rem;
-        font-weight: bold;
-        color: var(--text-primary);
-      }
-
-      &.total-price {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--primary-accent);
-      }
+      font-size: 0.9rem;
     }
 
+    .total-price-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+    
+    .total-price {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary-accent);
+    }
   }
 }
 
