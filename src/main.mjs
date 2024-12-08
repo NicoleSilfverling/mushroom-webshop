@@ -120,7 +120,7 @@ function filterProducts(e) {
       (product) => product.category === e.target.value
     );
   }
-
+  sort.value = ""; //reset sort
   printProducts();
 }
 
@@ -209,7 +209,6 @@ function printCart() {
   cartSummary.innerHTML = `
     <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
-  console.log(totalPrice);
   itemsInCart.innerHTML = `<div class="items-in-cart">${amountOfItemsInCart}</div>`;
 }
 
