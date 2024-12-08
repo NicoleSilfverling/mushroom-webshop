@@ -182,21 +182,23 @@ function calculatePrice() {
 function printCart() {
   cartContainer.innerHTML = "";
   cart.forEach((product) => {
+    const price = (product.amount * product.price).toFixed(2);
+    const discount = (
+      product.amount * product.originalPrice -
+      product.amount * product.price
+    ).toFixed(2);
+    const originalPrice = (product.amount * product.originalPrice).toFixed(2);
+
     cartContainer.innerHTML += `
      <div class="item">
         <img src=${product.img.src} alt=${product.img.alt}>
         <div class="details">
           <h3>${product.name}</h3>
-          <p class="price">${product.amount * product.price} kr</p>
+          <p class="price">${price} kr</p>
           ${
             product.originalPrice !== product.price
-              ? `<p class="price discount">-${
-                  product.amount * product.originalPrice -
-                  product.amount * product.price
-                } kr</p>
-                 <p class="price original-price">${
-                   product.amount * product.originalPrice
-                 } kr</p>`
+              ? `<p class="price discount">-${discount} kr</p>
+                 <p class="price original-price">${originalPrice} kr</p>`
               : ""
           }
           <p class="quantity">Antal: ${product.amount}</p>
@@ -205,9 +207,9 @@ function printCart() {
     `;
   });
   cartSummary.innerHTML = `
-    <p class="total-price">${totalPrice}</p>
+    <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
-
+  console.log(totalPrice);
   itemsInCart.innerHTML = `<div class="items-in-cart">${amountOfItemsInCart}</div>`;
 }
 
@@ -375,7 +377,7 @@ function priceChange() {
     (day === 1 && hour < 3)
   ) {
     products.forEach((product) => {
-      product.price = Math.round(product.price * 1.15); // Adds 15% to price
+      product.price = Number((product.price * 1.15).toFixed(2)); // Adds 15% to price
     });
   }
 }
