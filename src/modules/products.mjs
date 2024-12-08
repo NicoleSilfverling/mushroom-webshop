@@ -110,7 +110,7 @@ const products = [
   {
     id: 9,
     name: "Svampkniv",
-    price: 300,
+    price: 100,
     category: "tools",
     rating: 4.5,
     amount: 0,

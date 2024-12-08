@@ -199,6 +199,15 @@ input[type=number] {
           margin: 5px 0;
           color: var(--text-secondary);
         }
+
+        .discount{
+          color: rgb(255, 60, 60);
+        }
+
+        .original-price{
+          text-decoration: line-through;
+        }
+      
       }
 
     }

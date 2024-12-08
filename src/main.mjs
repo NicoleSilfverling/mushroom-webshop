@@ -28,6 +28,8 @@ sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", handleSubmit);
 
+priceChange();
+
 printProducts();
 
 //---------------------------------------------------------------
@@ -140,21 +142,17 @@ function increaseDecreaseProductCount(e) {
   const inputField = document.querySelector(`#amount-${id}`);
   inputField.value = products[id].amount;
   updateCart();
-  printCart();
-  countDownOrderReset();
 }
 
 //------------------------------------------------
 
 function updateCart() {
   cart.length = 0;
-  totalPrice = 0;
   amountOfItemsInCart = 0;
 
   products.forEach((product) => {
     if (product.amount > 0) {
       cart.push(product);
-      totalPrice += product.amount * product.price;
       amountOfItemsInCart += product.amount;
     }
   });
@@ -163,7 +161,23 @@ function updateCart() {
   } else {
     goToCheckoutBtn.setAttribute("disabled", "");
   }
+  applyDiscounts();
+  calculatePrice();
+  printCart();
+  countDownOrderReset();
 }
+
+//------------------------------------------------
+
+function calculatePrice() {
+  totalPrice = 0;
+
+  cart.forEach((product) => {
+    totalPrice += product.amount * product.price;
+  });
+}
+
+//------------------------------------------------
 
 function printCart() {
   cartContainer.innerHTML = "";
@@ -174,13 +188,24 @@ function printCart() {
         <div class="details">
           <h3>${product.name}</h3>
           <p class="price">${product.amount * product.price} kr</p>
+          ${
+            product.originalPrice !== product.price
+              ? `<p class="price discount">-${
+                  product.amount * product.originalPrice -
+                  product.amount * product.price
+                } kr</p>
+                 <p class="price original-price">${
+                   product.amount * product.originalPrice
+                 } kr</p>`
+              : ""
+          }
           <p class="quantity">Antal: ${product.amount}</p>
         </div>
       </div>
     `;
   });
   cartSummary.innerHTML = `
-          <p class="total-price">${totalPrice}</p>
+    <p class="total-price">${totalPrice}</p>
   `;
 
   itemsInCart.innerHTML = `<div class="items-in-cart">${amountOfItemsInCart}</div>`;
@@ -334,3 +359,87 @@ function printRating(rating) {
   }
   return starsRating;
 }
+
+//------------------------------------------------
+
+//Weekend surcharge for products
+function priceChange() {
+  const today = new Date();
+  const day = today.getDay(); // 0 Sunday to 6 Saturday
+  const hour = today.getHours();
+
+  if (
+    (day === 5 && hour >= 15) ||
+    day === 6 ||
+    day === 0 ||
+    (day === 1 && hour < 3)
+  ) {
+    products.forEach((product) => {
+      product.price = Math.round(product.price * 1.15); // Adds 15% to price
+    });
+  }
+}
+
+//------------------------------------------------
+/**
+ * Apply discount to items in cart
+ * @returns Array of string messages
+ */
+
+function applyDiscounts() {
+  const today = new Date();
+  const day = today.getDay(); // 0 Sunday to 6 Saturday
+  const hour = today.getHours();
+
+  let messages = []; // Stores all discount messages
+
+  cart.forEach((product) => {
+    // Check if we need to reset the price
+    if (!product.originalPrice) {
+      product.originalPrice = product.price; // Save the original price
+    } else {
+      product.price = product.originalPrice; // Reset to the original price
+    }
+
+    // Monday discount
+    if (day === 1 && hour < 10) {
+      product.price = product.price * 0.9; // Apply 10% discount
+
+      if (!messages.includes("Måndagsrabatt: 10 % på hela beställningen")) {
+        messages.push("Måndagsrabatt: 10 % på hela beställningen");
+      }
+    }
+
+    // Discount if 10 or more
+    if (product.amount >= 10) {
+      product.price = product.price * 0.9; // Apply 10% discount
+      messages.push(`Mängdrabatt: 10 % på ${product.name}`);
+    }
+  });
+
+  return { messages }; // TODO - display the messages
+}
+
+// Calculate shipping price
+// IF total amount > 15 shipping is free
+function calculateShipping(amountOfItemsInCart) {
+  if (amountOfItemsInCart > 15) {
+    return { message: "Fri frakt", shippingTotal: 0 };
+  } else {
+    return { message: "Frakt: ", shippingTotal: 25 + totalPrice * 0.1 };
+  }
+}
+
+// På måndagar innan kl. 10 ges 10 % rabatt på hela beställningssumman.
+// Detta visas i varukorgssammanställningen som en rad med texten "Måndagsrabatt: 10 % på hela beställningen".
+
+// På fredagar efter kl. 15 och fram till natten mellan söndag och måndag kl. 03.00 tillkommer
+// ett helgpåslag på 15 % på alla munkar. Detta ska inte framgå för kunden att munkarna är dyrare,
+// utan priset ska bara vara högre i "utskriften" av munkarna.
+
+// Om kunden har beställt minst 10 munkar av samma sort, ska munkpriset för just denna munksort rabatteras med 10 %
+
+// Om kunden beställer totalt mer än 15 munkar så blir frakten gratis.
+// I annat fall är fraktsumman 25 kr plus 10% av totalbeloppet i varukorgen.
+
+// Om kunden har beställt för totalt mer än 800 kr ska det inte gå att välja faktura som betalsätt.
