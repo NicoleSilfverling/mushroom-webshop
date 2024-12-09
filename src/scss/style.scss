@@ -21,7 +21,7 @@
   --text-secondary: #A3B0A3;
   --header-footer-bg: #2D3A2D;
   --success: #6BA072;
-  --warning: #CC7722;
+  --warning: #ffb973;
   --card-bg: #2D3A2D;
 }
 
@@ -73,7 +73,8 @@ header {
   display: none;
 }
 
-button {
+button,
+input[type="submit"] {
   background-color: var(--primary-accent);
   color: #FFF;
   padding: 10px 15px;
@@ -81,16 +82,18 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+
+  &:hover {
+    background-color: var(--secondary-accent);
+  }
+  &:disabled {
+    background-color: dimgrey;
+    color: #FFF;
+    opacity: 1;
+    cursor: default;
+  }
 }
-button:hover {
-  background-color: var(--secondary-accent);
-}
-button:disabled {
-  background-color: dimgrey;
-  color: #FFF;
-  opacity: 1;
-  cursor: default;
-}
+
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -155,9 +158,10 @@ input[type=number] {
 
 .cart {
   background-color: var(--card-bg);
-  border: 1px solid #e0e0e0;
+  // border: 1px solid #e0e0e0;
   border-radius: 8px;
-  width: 60%;
+  width: 100%;
+  // margin: 20px;
   padding: 20px;
   margin: 20px auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -207,9 +211,7 @@ input[type=number] {
         .original-price{
           text-decoration: line-through;
         }
-      
       }
-
     }
   }
 
@@ -237,6 +239,55 @@ input[type=number] {
   }
 }
 
+
+.form-container {
+  background-color: var(--card-bg);
+  // border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  width: 100%;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      display: flex;
+      flex-direction: column;
+
+      span {
+        color: var(--text-primary);
+        font-size: 1rem;
+      }
+
+      input,
+      textarea {
+        padding: 8px;
+        border: 1px solid var(--text-secondary);
+        border-radius: 4px;
+        background-color: var(--background);
+        font-size: 0.9;
+        color: var(--text-primary);
+
+        &:focus {
+          outline: 1px solid var(--primary-accent);
+          border-color: var(--primary-accent);
+        }
+      }
+
+      .error-container {
+        color: var(--warning);
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
 .input-error {
-  border: 2px solid var(--warning);
+  border: 2px solid var(--warning)!important;
 }

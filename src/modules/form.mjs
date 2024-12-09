@@ -25,6 +25,13 @@ export function validateForm(formData) {
   return errors;
 }
 
+// function inputRequired(input, name) {
+//   if (!input || input.trim() === "") {
+//     return `${name} obligatoriskt`;
+//   }
+//   return null;
+// }
+
 //----------------------------------------------------
 /**
  * Validates name and returns error message
@@ -56,7 +63,7 @@ function validateName(name) {
 
 function validateStreetName(street) {
   if (!street || street.trim() === "") {
-    return "Gatunamnet är obligatoriskt."; // Street name is required
+    return "Gata obligatoriskt."; // Street name is required
   } else if (street.length < 3) {
     return "Gatunamnet måste vara minst 3 tecken långt.";
   } else if (street.length > 100) {
@@ -76,7 +83,7 @@ function validateStreetName(street) {
 
 function validateZipCode(zipCode) {
   if (!zipCode || zipCode.trim() === "") {
-    return "Postnumret är obligatoriskt.";
+    return "Postnummer obligatoriskt.";
   } else if (!/^\d{5}$/.test(zipCode)) {
     // Matches exactly 5 digits
     return "Postnumret måste bestå av exakt 5 siffror.";
@@ -121,7 +128,7 @@ function validatePhone(phone) {
 
 function validateEmail(email) {
   if (!email || email.trim() === "") {
-    return "Email obligatorisk";
+    return "E-post obligatoriskt";
   } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
     return "Email ogiltigt format";
   }
