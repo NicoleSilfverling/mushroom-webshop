@@ -1,52 +1,25 @@
 export function validateForm(formData) {
   const errors = {};
 
-  const fname = formData.get("fname");
-  const lname = formData.get("lname");
-  const street = formData.get("street");
-  const zip = formData.get("zip");
-  const city = formData.get("city");
-  const entryCode = formData.get("entrycode");
-  const phone = formData.get("phone");
-  const email = formData.get("email");
+  // Form fields and their validator functions
+  const fieldsToValidate = {
+    fname: validateName,
+    lname: validateName,
+    street: validateStreetName,
+    zip: validateZipCode,
+    city: validateCityName,
+    entrycode: validateEntryCode,
+    phone: validatePhone,
+    email: validateEmail,
+  };
 
-  // TODO - Fix code repeat
-
-  // Validate first name
-  if (validateName(fname) != null) {
-    errors.fname = validateName(fname);
-  }
-
-  // Validate last name
-  if (validateName(lname) != null) {
-    errors.lname = validateName(lname);
-  }
-
-  // Validate street name
-  if (validateStreetName(street) != null) {
-    errors.street = validateStreetName(street);
-  }
-
-  //Validate zipcode
-  if (validateZipCode(zip) != null) {
-    errors.zip = validateZipCode(zip);
-  }
-
-  //Validate city
-  if (validateCityName(city) != null) {
-    errors.city = validateCityName(city);
-  }
-
-  if (validateEntryCode(entryCode) != null) {
-    errors.entrycode = validateEntryCode(entryCode);
-  }
-
-  if (validatePhone(phone) != null) {
-    errors.phone = validatePhone(phone);
-  }
-
-  if (validateEmail(email) != null) {
-    errors.email = validateEmail(email);
+  //
+  for (const [field, validator] of Object.entries(fieldsToValidate)) {
+    const formInput = formData.get(field);
+    const error = validator(formInput);
+    if (error) {
+      errors[field] = error;
+    }
   }
 
   return errors;
