@@ -98,16 +98,56 @@
         <input type="submit" value="Fortsätt till betalning"> 
       </form>
     </div>
-    <div id="payment" class="hidden">
+    <div id="payment" class="payment-method ">
       <form id="paymentForm">
-        <input type="radio" id="card" name="payment" value="card">
-        <label for="card">Kort</label><br>
-        <input type="radio" id="invoice" name="payment" value="invoice">
-        <label for="invoice">Faktura</label><br>
-        <label for="gdpr">GDPR:</label>
-        <input type="checkbox" id="gdpr" name="gdpr"><br>
-        <label for="newsletter">Nyhetsbrev:</label>
-        <input type="checkbox" id="newsletter" name="newsletter" checked><br>
+        <label>
+          <input type="radio" id="card" name="payment-option" value="card" checked>
+          <span>Betala med kort</span>
+        </label>
+        <label>
+          <input type="radio" id="invoice" name="payment-option" value="invoice">
+          <span>Betala med faktura</span>
+        </label>
+
+
+        <div class="card">
+          <label>
+            <span>Kortnummer</span>
+            <input type="text" id="cardNumber" name="card-number">
+          </label>
+          <label>
+            <span>Sista giltighetsdag MM/YY</span>
+            <input type="text" id="expiry" name="expiry">
+          </label>
+          <label>
+            <span>Namn på kortet</span>
+            <input type="text" id="name" name="name">
+          </label>
+          <label>
+            <span>Säkerhetskod</span>
+            <input type="number" id="cvc" name="cvc">
+          </label>
+        </div>
+
+
+
+
+        <div class="invoice">
+          <label>
+            <span>Personnummer</span>
+            <input type="text" id="personal-id" name="personal-id">
+          </label>
+        </div>
+
+
+        <label for="gdpr">
+          <input type="checkbox" id="gdpr" name="gdpr">
+          <span>GDPR</span>
+        </label>
+        <label for="newsletter">
+          <input type="checkbox" id="newsletter" name="newsletter" checked>
+          <span>Nyhetsbrev</span>
+        </label>
       </form>
     </div>
        <footer>

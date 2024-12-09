@@ -288,6 +288,84 @@ input[type=number] {
   }
 }
 
+
+.payment-method {
+  padding: 16px;
+  // border: 1px solid var(--text-secondary);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  max-width: 400px;
+  margin: 0 auto;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    label {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      color: var(--text-primary);
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: 8px;
+        accent-color: var(--primary-accent);
+      }
+
+      span {
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  .card, .invoice {
+    padding: 16px;
+    border: 1px solid var(--text-secondary);
+    border-radius: 8px;
+    background-color: var(--background);
+    max-width: 400px;
+    margin: 0 auto;
+  
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+  
+      span {
+        margin-bottom: 4px;
+        font-weight: bold;
+        color: var(--text-secondary);
+      }
+  
+      input {
+        padding: 8px;
+        border: 1px solid var(--text-secondary);
+        border-radius: 4px;
+        background-color: var(--background);
+        font-size: 0.9rem;
+        color: var(--text-primary);
+  
+        &:focus {
+          outline: none;
+          border-color: var(--primary-accent);
+          box-shadow: 0 0 4px var(--primary-accent);
+        }
+      }
+  
+      input[type="number"] {
+        appearance: textfield; // Removes arrows on number inputs
+      }
+    }
+  }
+  
+}
+
+
 .input-error {
   border: 2px solid var(--warning)!important;
 }
