@@ -24,6 +24,7 @@ const filter = document.querySelector("#filter");
 const checkout = document.querySelector("#checkout");
 const checkoutForm = document.querySelector("#checkoutForm");
 const countDown = document.querySelector("#countDown");
+const payment = document.querySelector("#payment");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
@@ -234,6 +235,12 @@ function handleSubmit(e) {
 
   const errors = validateForm(formData);
   printFormValidationErrors(errors);
+
+  //If no validation errors
+  if (Object.keys(errors).length === 0) {
+    payment.classList.remove("hidden");
+    payment.scrollIntoView();
+  }
 }
 
 //------------------------------------------------
