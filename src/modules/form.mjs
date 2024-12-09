@@ -6,6 +6,9 @@ export function validateForm(formData) {
   const street = formData.get("street");
   const zip = formData.get("zip");
   const city = formData.get("city");
+  const entryCode = formData.get("entrycode");
+  const phone = formData.get("phone");
+  const email = formData.get("email");
 
   // TODO - Fix code repeat
 
@@ -32,6 +35,18 @@ export function validateForm(formData) {
   //Validate city
   if (validateCityName(city) != null) {
     errors.city = validateCityName(city);
+  }
+
+  if (validateEntryCode(entryCode) != null) {
+    errors.entrycode = validateEntryCode(entryCode);
+  }
+
+  if (validatePhone(phone) != null) {
+    errors.phone = validatePhone(phone);
+  }
+
+  if (validateEmail(email) != null) {
+    errors.email = validateEmail(email);
   }
 
   return errors;
@@ -108,4 +123,34 @@ function validateCityName(city) {
     return "Ort får endast innehålla bokstäver, mellanslag och bindestreck.";
   }
   return null; // No errors
+}
+
+function validateEntryCode(entryCode) {
+  if (!/^[0-9*#]*$/.test(entryCode)) {
+    // Allows empty(field not required) numbers, * and #
+    return "Portkod får endast innehålla siffror, * och #";
+  }
+  return null;
+}
+
+function validatePhone(phone) {
+  if (!phone || phone.trim() === "") {
+    return "Telefon obligatoriskt.";
+  } else if (
+    !/^\+?([0-9]{1,3})?[-. ]?(\(?[0-9]{1,4}\)?)?[-. ]?([0-9]{1,4})[-. ]?([0-9]{1,4})[-. ]?([0-9]{1,9})$/.test(
+      phone
+    ) // Allows international phonenumber with +, allwos user to split number with: - . space
+  ) {
+    return "Telefonnummer ogiltigt format";
+  }
+  return null;
+}
+
+function validateEmail(email) {
+  if (!email || email.trim() === "") {
+    return "Email obligatorisk";
+  } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+    return "Email ogiltigt format";
+  }
+  return null;
 }
