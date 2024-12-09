@@ -9,11 +9,13 @@ let amountOfItemsInCart = 0;
 let starsRating = "";
 let isThemeDark = false;
 let discountMessages = [];
+let shippingInfo = {};
 
 const productContainer = document.querySelector("#productContainer");
 const toggleTheme = document.querySelector("#toggleThemeBtn");
 const cartContainer = document.querySelector("#cartItems");
 const cartSummary = document.querySelector("#cartSummary");
+const shippingContainer = document.querySelector("#shipping");
 const discountsContainer = document.querySelector("#discounts");
 const itemsInCart = document.querySelector("#itemsInCart");
 const goToCheckoutBtn = document.querySelector("#goToCheckout");
@@ -177,6 +179,8 @@ function calculatePrice() {
   cart.forEach((product) => {
     totalPrice += product.amount * product.price;
   });
+
+  totalPrice += calculateShipping(amountOfItemsInCart);
 }
 
 //------------------------------------------------
@@ -211,6 +215,10 @@ function printCart() {
   discountsContainer.innerHTML = discountMessages
     .map((message) => `<p>${message}</p>`)
     .join("");
+  shippingContainer.innerHTML = `<span>${shippingInfo.message}</span>`;
+  if (shippingInfo.shippingTotal !== 0) {
+    shippingContainer.innerHTML += `<span>${shippingInfo.shippingTotal} kr</span>`;
+  }
   cartSummary.innerHTML = `
     <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
@@ -357,7 +365,7 @@ function printRating(rating) {
 
   //floor removes decimal
   for (let index = 0; index < Math.floor(rating); index++) {
-    starsRating += `<img src="./icons/star.png" alt="stjärna">`;
+    starsRating += `<img src="./icons/star.png" alt="hel stjärna">`;
   }
   if (rating % 1 != 0) {
     // if decimal add halfstar
@@ -424,29 +432,27 @@ function applyDiscounts() {
       discountMessages.push(`Mängdrabatt: 10 % på ${product.name}`);
     }
   });
-  console.log(discountMessages);
 }
 
-// Calculate shipping price
-// IF total amount > 15 shipping is free
+/**
+ * Calculate shipping price
+ *
+ * @param {Number} amountOfItemsInCart
+ * @returns {Number} Calculated shipping amount
+ */
 function calculateShipping(amountOfItemsInCart) {
+  shippingInfo = {};
   if (amountOfItemsInCart > 15) {
-    return { message: "Fri frakt", shippingTotal: 0 };
+    shippingInfo = { message: "Fri frakt", shippingTotal: 0 };
+    return 0;
   } else {
-    return { message: "Frakt: ", shippingTotal: 25 + totalPrice * 0.1 };
+    shippingInfo = {
+      message: "Frakt: ",
+      shippingTotal: (25 + totalPrice * 0.1).toFixed(2),
+    };
+    return 25 + totalPrice * 0.1;
   }
 }
 
-// På måndagar innan kl. 10 ges 10 % rabatt på hela beställningssumman.
-// Detta visas i varukorgssammanställningen som en rad med texten "Måndagsrabatt: 10 % på hela beställningen".
-
-// På fredagar efter kl. 15 och fram till natten mellan söndag och måndag kl. 03.00 tillkommer
-// ett helgpåslag på 15 % på alla munkar. Detta ska inte framgå för kunden att munkarna är dyrare,
-// utan priset ska bara vara högre i "utskriften" av munkarna.
-
-// Om kunden har beställt minst 10 munkar av samma sort, ska munkpriset för just denna munksort rabatteras med 10 %
-
-// Om kunden beställer totalt mer än 15 munkar så blir frakten gratis.
-// I annat fall är fraktsumman 25 kr plus 10% av totalbeloppet i varukorgen.
-
+// TODO
 // Om kunden har beställt för totalt mer än 800 kr ska det inte gå att välja faktura som betalsätt.
