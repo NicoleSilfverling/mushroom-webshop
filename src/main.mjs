@@ -273,7 +273,6 @@ function handleFocusOutForm(e) {
   //If no errors enable go to payment
   if (Object.keys(errors).length === 0) {
     goToPaymentBtn.removeAttribute("disabled");
-    goToPaymentBtn.focus();
   }
 }
 
