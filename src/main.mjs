@@ -10,6 +10,7 @@ let starsRating = "";
 let isThemeDark = false;
 let discountMessages = [];
 let shippingInfo = {};
+let selectedPaymentOption = "card";
 
 const productContainer = document.querySelector("#productContainer");
 const toggleTheme = document.querySelector("#toggleThemeBtn");
@@ -27,6 +28,10 @@ const checkoutForm = document.querySelector("#checkoutForm");
 const countDown = document.querySelector("#countDown");
 const payment = document.querySelector("#payment");
 const goToPaymentBtn = document.querySelector("#goToPayment");
+const cardContainer = document.querySelector("#card");
+const invoiceContainer = document.querySelector("#invoice");
+const radios = document.querySelector("#radios");
+const radioButtons = document.querySelectorAll('input[name="payment-option"]');
 
 //Checkout form inputs
 const inputs = [
@@ -52,6 +57,10 @@ inputs.forEach((input) => {
   input.addEventListener("focusout", (e) => {
     handleFocusOutForm(e);
   });
+});
+
+radioButtons.forEach((radio) => {
+  radio.addEventListener("change", switchPaymentMethod);
 });
 
 priceChange();
@@ -286,6 +295,7 @@ function handleFocusOutForm(e) {
 function goToPayment(e) {
   e.preventDefault(); //prevents page to reload on submit
 
+  removeInvoiceOption();
   payment.classList.remove("hidden");
   payment.scrollIntoView();
 }
@@ -345,7 +355,7 @@ function clearCartAndForms() {
     product.amount = 0;
   });
 
-  //Hides checkout form
+  //Reset checkout form
   checkout.classList.add("hidden");
   goToPaymentBtn.setAttribute("disabled", "");
 
@@ -353,6 +363,14 @@ function clearCartAndForms() {
   updateCart();
   printProducts();
   printCart();
+
+  // Reset the payment
+  payment.classList.add("hidden");
+  const cardRadioButton = document.querySelector(
+    'input[name="payment-option"][value="card"]'
+  );
+  cardRadioButton.checked = true;
+  switchPaymentMethod(null, "card");
 }
 //------------------------------------------------
 
@@ -493,7 +511,7 @@ function applyDiscounts() {
     }
   });
 }
-
+//------------------------------------------------
 /**
  * Calculate shipping price
  *
@@ -517,5 +535,33 @@ function calculateShipping(amountOfItemsInCart) {
   }
 }
 
-// TODO
-// Om kunden har beställt för totalt mer än 800 kr ska det inte gå att välja faktura som betalsätt.
+//------------------------------------------------
+
+function switchPaymentMethod(e, value) {
+  // If event is passed, use its value, else use the manual value
+  let paymentMethod = e ? e.target.value : value;
+
+  if (paymentMethod == "card") {
+    cardContainer.classList.remove("hidden");
+    invoiceContainer.classList.add("hidden");
+  } else {
+    cardContainer.classList.add("hidden");
+    invoiceContainer.classList.remove("hidden");
+  }
+
+  selectedPaymentOption = paymentMethod;
+}
+
+//------------------------------------------------
+/**
+ * Hide invoice option
+ */
+function removeInvoiceOption() {
+  if (totalPrice > 800) {
+    radios.classList.add("hidden");
+    cardContainer.classList.remove("hidden");
+    invoiceContainer.classList.add("hidden");
+  } else {
+    radios.classList.remove("hidden");
+  }
+}

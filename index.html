@@ -53,7 +53,6 @@
         <button id="goToCheckout" href="#checkout" disabled>Till kassan</button>
       </div>
     </div>
-    <!-- TODO add functionallity to the form -->
     <div id="checkout" class="form-container hidden">
       <form id="checkoutForm">
         <label for="fname">
@@ -101,17 +100,19 @@
     </div>
     <div id="payment" class="payment-method hidden">
       <form id="paymentForm">
-        <label>
-          <input type="radio" id="card" name="payment-option" value="card" checked>
-          <span>Betala med kort</span>
-        </label>
-        <label>
-          <input type="radio" id="invoice" name="payment-option" value="invoice">
-          <span>Betala med faktura</span>
-        </label>
+        <div id="radios">
+          <label>
+            <input type="radio" id="card-option" name="payment-option" value="card" checked>
+            <span>Betala med kort</span>
+          </label>
+          <label>
+            <input type="radio" id="invoice-option" name="payment-option" value="invoice">
+            <span>Betala med faktura</span>
+          </label>
+        </div>
 
 
-        <div class="card">
+        <div id="card" class="card">
           <label>
             <span>Kortnummer</span>
             <input type="text" id="cardNumber" name="card-number">
@@ -133,7 +134,7 @@
 
 
 
-        <div class="invoice">
+        <div id="invoice" class="invoice hidden">
           <label>
             <span>Personnummer</span>
             <input type="text" id="personal-id" name="personal-id">
@@ -149,7 +150,7 @@
           <input type="checkbox" id="newsletter" name="newsletter" checked>
           <span>Nyhetsbrev</span>
         </label>
-        <input type="submit" value="Betala och beställ"> 
+        <input type="submit" value="Betala"> 
       </form>
     </div>
        <footer>
