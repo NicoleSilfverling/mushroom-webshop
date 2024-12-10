@@ -59,9 +59,9 @@ function printProducts() {
           <button class="productCount" data-id="decrease-${
             product.id
           }">-</button>
-          <input type="number" id="amount-${product.id}" value="${
+          <span id="amount-${product.id}" class="product-amount">${
       product.amount
-    }">
+    }</span>
           <button class="productCount" data-id="increase-${
             product.id
           }">+</button>
@@ -146,8 +146,8 @@ function increaseDecreaseProductCount(e) {
     }
     products[id].amount -= 1;
   }
-  const inputField = document.querySelector(`#amount-${id}`);
-  inputField.value = products[id].amount;
+  const amountField = document.querySelector(`#amount-${id}`);
+  amountField.textContent = products[id].amount;
   updateCart();
 }
 
