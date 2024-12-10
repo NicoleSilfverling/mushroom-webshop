@@ -19,6 +19,7 @@ const shippingContainer = document.querySelector("#shipping");
 const discountsContainer = document.querySelector("#discounts");
 const itemsInCart = document.querySelector("#itemsInCart");
 const goToCheckoutBtn = document.querySelector("#goToCheckout");
+const clearOrder = document.querySelector("#clearOrder");
 const sort = document.querySelector("#sort");
 const filter = document.querySelector("#filter");
 const checkout = document.querySelector("#checkout");
@@ -29,6 +30,7 @@ const payment = document.querySelector("#payment");
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
 goToCheckoutBtn.addEventListener("click", goToCheckout);
+clearOrder.addEventListener("click", clearCartAndForms);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", handleSubmit);
@@ -216,10 +218,12 @@ function printCart() {
   discountsContainer.innerHTML = discountMessages
     .map((message) => `<p>${message}</p>`)
     .join("");
+
   shippingContainer.innerHTML = `<span>${shippingInfo.message}</span>`;
   if (shippingInfo.shippingTotal !== 0) {
     shippingContainer.innerHTML += `<span>${shippingInfo.shippingTotal} kr</span>`;
   }
+
   cartSummary.innerHTML = `
     <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
@@ -295,6 +299,9 @@ function clearCartAndForms() {
   products.forEach((product) => {
     product.amount = 0;
   });
+
+  //Hides checkout form
+  checkout.classList.add("hidden");
 
   // update and print
   updateCart();
@@ -449,7 +456,10 @@ function applyDiscounts() {
  */
 function calculateShipping(amountOfItemsInCart) {
   shippingInfo = {};
-  if (amountOfItemsInCart > 15) {
+  if (amountOfItemsInCart === 0) {
+    shippingInfo = { message: "", shippingTotal: 0 };
+    return null;
+  } else if (amountOfItemsInCart > 15) {
     shippingInfo = { message: "Fri frakt", shippingTotal: 0 };
     return 0;
   } else {

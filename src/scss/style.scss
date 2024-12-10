@@ -365,6 +365,18 @@ input[type=number] {
   
 }
 
+.clear-order {
+  background-color:  var(--card-bg);
+  border: 2px solid var(--warning);
+  color:  var(--warning);
+  width: fit-content;
+  font-size: 0.9rem;
+  &:hover {
+    background-color: var(--warning);
+    color: var(--card-bg);
+  }
+}
+
 
 .input-error {
   border: 2px solid var(--warning)!important;
