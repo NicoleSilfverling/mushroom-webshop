@@ -1,6 +1,6 @@
 import "./scss/style.scss";
 import products from "./modules/products.mjs";
-import { validateForm } from "./modules/form.mjs";
+import { validateForm, validateFormField } from "./modules/form.mjs";
 
 const cart = [];
 let filteredProducts = [...products];
@@ -26,6 +26,19 @@ const checkout = document.querySelector("#checkout");
 const checkoutForm = document.querySelector("#checkoutForm");
 const countDown = document.querySelector("#countDown");
 const payment = document.querySelector("#payment");
+const goToPaymentBtn = document.querySelector("#goToPayment");
+
+//Checkout form inputs
+const inputs = [
+  document.querySelector("#fname"),
+  document.querySelector("#lname"),
+  document.querySelector("#street"),
+  document.querySelector("#zip"),
+  document.querySelector("#city"),
+  document.querySelector("#entrycode"),
+  document.querySelector("#phone"),
+  document.querySelector("#email"),
+];
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
@@ -33,7 +46,13 @@ goToCheckoutBtn.addEventListener("click", goToCheckout);
 clearOrder.addEventListener("click", clearCartAndForms);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
-checkoutForm.addEventListener("submit", handleSubmit);
+checkoutForm.addEventListener("submit", goToPayment);
+
+inputs.forEach((input) => {
+  input.addEventListener("focusout", (e) => {
+    handleFocusOutForm(e);
+  });
+});
 
 priceChange();
 
@@ -232,19 +251,44 @@ function printCart() {
 
 //------------------------------------------------
 
-function handleSubmit(e) {
+/**
+ * Validates form when focus out
+ * @param {*} e
+ */
+
+function handleFocusOutForm(e) {
+  const fieldName = e.target.id;
+  const fieldValue = e.target.value;
+
+  // Validate the field
+  const error = validateFormField(fieldName, fieldValue);
+
+  // Display validation errors
+  printFormValidationErrors({ [fieldName]: error });
+
+  // Validates full form
+  const formData = new FormData(checkoutForm);
+  const errors = validateForm(formData);
+
+  //If no errors enable go to payment
+  if (Object.keys(errors).length === 0) {
+    goToPaymentBtn.removeAttribute("disabled");
+    goToPaymentBtn.focus();
+  }
+}
+
+//------------------------------------------------
+
+/**
+ * Go to payment
+ * @param {*} e
+ */
+
+function goToPayment(e) {
   e.preventDefault(); //prevents page to reload on submit
 
-  const formData = new FormData(checkoutForm);
-
-  const errors = validateForm(formData);
-  printFormValidationErrors(errors);
-
-  //If no validation errors
-  if (Object.keys(errors).length === 0) {
-    payment.classList.remove("hidden");
-    payment.scrollIntoView();
-  }
+  payment.classList.remove("hidden");
+  payment.scrollIntoView();
 }
 
 //------------------------------------------------
@@ -254,19 +298,21 @@ function handleSubmit(e) {
  * @param {*} errors
  */
 function printFormValidationErrors(errors) {
-  clearPrintedErrors();
-
   // Prints error message
   Object.entries(errors).forEach(([field, message]) => {
     const errorElement = document.querySelector(`#${field}-error`);
-    const input = document.querySelector(`#${field}-input`);
+    const input = document.querySelector(`#${field}`);
 
-    if (errorElement) {
+    if (message) {
       errorElement.innerHTML = message;
       input.classList.add("input-error");
+    } else {
+      errorElement.innerHTML = "";
+      input.classList.remove("input-error");
     }
   });
 }
+
 //------------------------------------------------
 
 /**
@@ -276,11 +322,11 @@ function clearPrintedErrors() {
   //Clear all printed error messages
   const errorElements = document.querySelectorAll("[id$='-error']"); // select all with id that ends with "-error"
   errorElements.forEach((error) => {
-    error.innerHTML = "";
+    error.innerHTML = ""; // Clear the error message
   });
 
   // Select all inputs with potential error messages
-  const inputElements = document.querySelectorAll("[id$='-input']");
+  const inputElements = document.querySelectorAll("input");
 
   // Clear all error classes from inputs
   inputElements.forEach((input) => {
@@ -302,6 +348,7 @@ function clearCartAndForms() {
 
   //Hides checkout form
   checkout.classList.add("hidden");
+  goToPaymentBtn.setAttribute("disabled", "");
 
   // update and print
   updateCart();

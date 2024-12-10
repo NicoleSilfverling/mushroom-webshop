@@ -1,36 +1,32 @@
+// Form fields and their validator functions
+const validators = {
+  fname: validateName,
+  lname: validateName,
+  street: validateStreetName,
+  zip: validateZipCode,
+  city: validateCityName,
+  entrycode: validateEntryCode,
+  phone: validatePhone,
+  email: validateEmail,
+};
+
+export function validateFormField(fieldName, fieldValue) {
+  const validator = validators[fieldName];
+  return validator(fieldValue);
+}
+
 export function validateForm(formData) {
   const errors = {};
 
-  // Form fields and their validator functions
-  const fieldsToValidate = {
-    fname: validateName,
-    lname: validateName,
-    street: validateStreetName,
-    zip: validateZipCode,
-    city: validateCityName,
-    entrycode: validateEntryCode,
-    phone: validatePhone,
-    email: validateEmail,
-  };
-
-  //
-  for (const [field, validator] of Object.entries(fieldsToValidate)) {
+  for (const [field, validator] of Object.entries(validators)) {
     const formInput = formData.get(field);
     const error = validator(formInput);
     if (error) {
       errors[field] = error;
     }
   }
-
   return errors;
 }
-
-// function inputRequired(input, name) {
-//   if (!input || input.trim() === "") {
-//     return `${name} obligatoriskt`;
-//   }
-//   return null;
-// }
 
 //----------------------------------------------------
 /**
