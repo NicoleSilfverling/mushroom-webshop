@@ -93,7 +93,7 @@ function printProducts() {
   filteredProducts.forEach((product, index) => {
     productContainer.innerHTML += `
         <article class="product-card">
-          <img src=${product.img.src} alt=${
+          <img src=${product.img.src} loading="lazy" alt=${
       product.img.alt
     } width="250" height="250">
           <h2>${product.name}</h2>
