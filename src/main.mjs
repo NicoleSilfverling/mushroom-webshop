@@ -631,26 +631,15 @@ function printOrderSummary() {
     <p>Tack för din beställning ${submittedForm.fname}!</p>
     <p>Orderbekräftelse skickas till ${submittedForm.email} inom kort.</p>
     <p>Datum: ${prettyDate(today)}</p>
-    <h3>Levereras adress</h3>
+    <h3>Skickas till</h3>
     <p>${submittedForm.street}</p>
     <p>${submittedForm.city}</p>
     <p>${submittedForm.zip}</p>
     <p>Leverans datum: ${prettyDate(nextThreeDays)}</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Produktnamn</th>
-          <th>Pris</th>
-          <th>Antal</th>
-          <th>Summa</th>
-          <th>Rabatt</th>
-        </tr>
-      </thead>
-      <tbody id="productList">
-        <!-- Rows will be dynamically inserted here -->
-      </tbody>
-    </table>
+    <h3>Produkter</h3>
+    <div id="productList">
+      <!-- Rows will be dynamically inserted here -->
+    </div>
     <p id="finalShipping"></p>
     <h3>Totalt: ${totalPrice}</h3>
 
@@ -664,25 +653,24 @@ function printOrderSummary() {
     finalShipping.innerHTML += `<span>${shippingInfo.shippingTotal} kr</span>`;
   }
 
+  productList.innerHTML = "";
+
   cart.forEach((product) => {
     const price = calculateProductPrice(product);
     const discount = calculateProductPriceDiscount(product);
     const originalPrice = calculateProductOriginalPrice(product);
 
-    const row = document.createElement("tr");
-    row.innerHTML = `
-        <td>${product.name}</td>
-        <td>${product.price} kr</td>
-        <td>${product.amount}</td>
-        <td>${price}</td>
+    productList.innerHTML += `
+        <h4>${product.name}</h4>
+        <p>Pris: ${product.price} kr</p>
+        <p>Antal: ${product.amount}</p>
+        <p>Totalt: ${price} kr</p>
         ${
           product.originalPrice !== product.price
-            ? `<td class="discount">${discount}</td>
-            <td class="original-price">${originalPrice}</td>`
+            ? `<p class="discount">Rabatt: ${discount}</p>
+            <p class="original-price">Ordinarie pris: ${originalPrice}</p>`
             : ""
         }
-   
     `;
-    productList.appendChild(row);
   });
 }
