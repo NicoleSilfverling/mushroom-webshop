@@ -29,7 +29,8 @@ This is a web application for a **Mushroom Shop** that allows users to browse, o
 ## Demo
 You can view the live project [here](https://medieinstitutet.github.io/fed24d-js-intro-inl-1-webshop-NicoleSilfverling/).
 
+![mobile-demo](https://github.com/user-attachments/assets/c9ce3390-6db1-4d1b-87f1-d5d4757f527b)
 
+![demo-desktop](https://github.com/user-attachments/assets/56b56cb5-0bb4-420d-9e71-3900803e242f)
 
-
-
+![demo-desktop-darkmode](https://github.com/user-attachments/assets/86c6cbd7-b3ef-4704-acd0-e376465d6bd4)
