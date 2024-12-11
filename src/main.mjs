@@ -1,6 +1,12 @@
 import "./scss/style.scss";
 import products from "./modules/products.mjs";
 import { validateForm, validateFormField } from "./modules/form.mjs";
+import {
+  prettyDate,
+  calculateProductPrice,
+  calculateProductOriginalPrice,
+  calculateProductPriceDiscount,
+} from "./modules/helpers.mjs";
 
 const cart = [];
 let filteredProducts = [...products];
@@ -11,6 +17,7 @@ let isThemeDark = false;
 let discountMessages = [];
 let shippingInfo = {};
 let selectedPaymentOption = "card";
+let submittedForm = {};
 
 const productContainer = document.querySelector("#productContainer");
 const toggleTheme = document.querySelector("#toggleThemeBtn");
@@ -34,6 +41,7 @@ const radios = document.querySelector("#radios");
 const radioButtons = document.querySelectorAll('input[name="payment-option"]');
 const gdprCheckbox = document.querySelector("#gdpr");
 const payBtn = document.querySelector("#payBtn");
+const orderSummary = document.querySelector("#orderSummary");
 
 //Checkout form inputs
 const inputs = [
@@ -55,6 +63,7 @@ sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", goToPayment);
 gdprCheckbox.addEventListener("change", validatePayment);
+payBtn.addEventListener("click", submitPayment);
 
 inputs.forEach((input) => {
   input.addEventListener("focusout", (e) => {
@@ -297,6 +306,12 @@ function handleFocusOutForm(e) {
 
 function goToPayment(e) {
   e.preventDefault(); //prevents page to reload on submit
+
+  const formData = new FormData(checkoutForm);
+
+  formData.forEach((value, key) => {
+    submittedForm[key] = value;
+  });
 
   removeInvoiceOption();
   payment.classList.remove("hidden");
@@ -575,4 +590,75 @@ function validatePayment() {
   } else {
     payBtn.setAttribute("disabled", "");
   }
+}
+
+function submitPayment(e) {
+  e.preventDefault();
+  printOrderSummary();
+}
+
+function printOrderSummary() {
+  const today = new Date();
+  const nextThreeDays = new Date(today);
+  nextThreeDays.setDate(today.getDate() + 3);
+
+  orderSummary.innerHTML = `
+    <h2>Order bekräftelse</h2>
+    <p>Tack för din beställning ${submittedForm.fname}!</p>
+    <p>Orderbekräftelse skickas till ${submittedForm.email} inom kort.</p>
+    <p>Datum: ${prettyDate(today)}</p>
+    <h3>Levereras adress</h3>
+    <p>${submittedForm.street}</p>
+    <p>${submittedForm.city}</p>
+    <p>${submittedForm.zip}</p>
+    <p>Leverans datum: ${prettyDate(nextThreeDays)}</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Produktnamn</th>
+          <th>Pris</th>
+          <th>Antal</th>
+          <th>Summa</th>
+          <th>Rabatt</th>
+        </tr>
+      </thead>
+      <tbody id="productList">
+        <!-- Rows will be dynamically inserted here -->
+      </tbody>
+    </table>
+    <p id="finalShipping"></p>
+    <h3>Totalt: ${totalPrice}</h3>
+
+  `;
+
+  const productList = document.getElementById("productList");
+  const finalShipping = document.getElementById("finalShipping");
+
+  finalShipping.innerHTML = `<span>${shippingInfo.message}</span>`;
+  if (shippingInfo.shippingTotal !== 0) {
+    finalShipping.innerHTML += `<span>${shippingInfo.shippingTotal} kr</span>`;
+  }
+
+  cart.forEach((product) => {
+    const price = calculateProductPrice(product);
+    const discount = calculateProductPriceDiscount(product);
+    const originalPrice = calculateProductOriginalPrice(product);
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+        <td>${product.name}</td>
+        <td>${product.price} kr</td>
+        <td>${product.amount}</td>
+        <td>${price}</td>
+        ${
+          product.originalPrice !== product.price
+            ? `<td class="discount">${discount}</td>
+            <td class="original-price">${originalPrice}</td>`
+            : ""
+        }
+   
+    `;
+    productList.appendChild(row);
+  });
 }
