@@ -7,6 +7,7 @@ import {
   calculateProductOriginalPrice,
   calculateProductPriceDiscount,
 } from "./modules/helpers.mjs";
+import { validatePersonalId, validateGdpr } from "./modules/payment.mjs";
 
 const cart = [];
 let filteredProducts = [...products];
@@ -54,6 +55,9 @@ const inputs = [
   document.querySelector("#phone"),
   document.querySelector("#email"),
 ];
+// payment form inputs
+const personalId = document.querySelector("#personalId");
+const gdpr = document.querySelector("#gdpr");
 
 //EventListeners
 toggleTheme.addEventListener("click", toggleDarkLightMode);
@@ -62,8 +66,9 @@ clearOrder.addEventListener("click", clearCartAndForms);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", goToPayment);
-gdprCheckbox.addEventListener("change", validatePayment);
 payBtn.addEventListener("click", submitPayment);
+personalId.addEventListener("change", validatePayment);
+gdpr.addEventListener("change", validatePayment);
 
 inputs.forEach((input) => {
   input.addEventListener("focusout", (e) => {
@@ -565,6 +570,8 @@ function switchPaymentMethod(e, value) {
   }
 
   selectedPaymentOption = paymentMethod;
+
+  validatePayment();
 }
 
 //------------------------------------------------
@@ -582,11 +589,31 @@ function removeInvoiceOption() {
 }
 
 function validatePayment() {
-  if (gdprCheckbox.checked) {
-    payBtn.removeAttribute("disabled");
-  } else {
-    payBtn.setAttribute("disabled", "");
+  const personalIdError = document.querySelector("#personalIdError");
+  const gdprError = document.querySelector("#gdprError");
+
+  // Clear error messages
+  personalIdError.textContent = "";
+  gdprError.textContent = "";
+
+  // Validate GDPR
+  const gdprErrorMessage = validateGdpr(gdpr);
+  if (gdprErrorMessage) {
+    gdprError.textContent = gdprErrorMessage;
+    return payBtn.setAttribute("disabled", "");
   }
+
+  // Handle invoice payment option
+  if (selectedPaymentOption === "invoice") {
+    const personalIdErrorMessage = validatePersonalId(personalId);
+    if (personalIdErrorMessage) {
+      personalIdError.textContent = personalIdErrorMessage;
+      return payBtn.setAttribute("disabled", "");
+    }
+  }
+
+  // Enable the button if all validations pass
+  payBtn.removeAttribute("disabled");
 }
 
 function submitPayment(e) {

@@ -137,7 +137,8 @@
         <div id="invoice" class="invoice hidden">
           <label>
             <span>Personnummer</span>
-            <input type="text" id="personal-id" name="personal-id">
+            <input type="text" id="personalId" name="personal-id">
+            <span id="personalIdError" class="error-container"></span>
           </label>
         </div>
 
@@ -145,6 +146,7 @@
           <label for="gdpr">
             <input type="checkbox" id="gdpr" name="gdpr" required>
             <span>GDPR*</span>
+            <span id="gdprError" class="error-container"></span>
           </label>
           <label for="newsletter">
             <input type="checkbox" id="newsletter" name="newsletter" checked>
