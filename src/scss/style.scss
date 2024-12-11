@@ -1,28 +1,28 @@
-@use 'reset';
+@use "reset";
 
 :root {
-  --background: #F5F8F1;
-  --primary-accent: #4B7A47;
-  --secondary-accent: #87A985;
-  --text-primary: #3A4A3A;
-  --text-secondary: #5E6E5E;
-  --header-footer-bg: #DDE4D0;
-  --success: #6BA072;
-  --warning: #CC7722;
-  --card-bg: #FFFFFF;
+  --background: #f5f8f1;
+  --primary-accent: #4b7a47;
+  --secondary-accent: #87a985;
+  --text-primary: #3a4a3a;
+  --text-secondary: #5e6e5e;
+  --header-footer-bg: #dde4d0;
+  --success: #6ba072;
+  --warning: #cc7722;
+  --card-bg: #ffffff;
 }
 
 /* Dark Mode Colors */
 .dark-mode {
-  --background: #1F2A20;
-  --primary-accent: #5F8765;
-  --secondary-accent: #7F9D7F;
-  --text-primary: #E5EDE0;
-  --text-secondary: #A3B0A3;
-  --header-footer-bg: #2D3A2D;
-  --success: #6BA072;
+  --background: #1f2a20;
+  --primary-accent: #5f8765;
+  --secondary-accent: #7f9d7f;
+  --text-primary: #e5ede0;
+  --text-secondary: #a3b0a3;
+  --header-footer-bg: #2d3a2d;
+  --success: #6ba072;
   --warning: #ffb973;
-  --card-bg: #2D3A2D;
+  --card-bg: #2d3a2d;
 }
 
 body {
@@ -34,7 +34,8 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-header, footer {
+header,
+footer {
   width: 100%;
   padding: 20px;
   background-color: var(--header-footer-bg);
@@ -57,7 +58,7 @@ header {
     }
     .items-in-cart {
       background-color: var(--primary-accent);
-      color:#fff;
+      color: #fff;
       height: 20px;
       width: 20px;
       border-radius: 50%;
@@ -67,11 +68,10 @@ header {
       font-size: 0.8rem;
       transition: transform 0.3s ease-in-out; /* Smooth scaling transition */
     }
-    
+
     .items-in-cart.scale-up {
       transform: scale(1.5); /* Scale up to 1.5x size */
     }
-   
   }
 }
 .hidden {
@@ -81,7 +81,7 @@ header {
 button,
 input[type="submit"] {
   background-color: var(--primary-accent);
-  color: #FFF;
+  color: #fff;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -93,12 +93,11 @@ input[type="submit"] {
   }
   &:disabled {
     background-color: dimgrey;
-    color: #FFF;
+    color: #fff;
     opacity: 1;
     cursor: default;
   }
 }
-
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -108,7 +107,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 .product-grid {
@@ -211,11 +210,11 @@ input[type=number] {
           margin: 5px 0;
           color: var(--text-secondary);
         }
-        .discount{
+        .discount {
           color: rgb(255, 60, 60);
         }
-        
-        .original-price{
+
+        .original-price {
           text-decoration: line-through;
         }
       }
@@ -237,7 +236,7 @@ input[type=number] {
       font-weight: bold;
       color: var(--text-primary);
     }
-    
+
     .total-price {
       font-size: 1.2rem;
       font-weight: bold;
@@ -245,7 +244,6 @@ input[type=number] {
     }
   }
 }
-
 
 .form-container {
   background-color: var(--card-bg);
@@ -326,27 +324,28 @@ input[type=number] {
     }
   }
 
-  .card, .invoice {
+  .card,
+  .invoice {
     padding: 16px;
     border: 1px solid var(--text-secondary);
     border-radius: 8px;
     background-color: var(--background);
     max-width: 400px;
     margin: 0 auto;
-  
+
     label {
       display: flex;
       flex-direction: column;
       margin-bottom: 12px;
       font-size: 0.9rem;
       color: var(--text-primary);
-  
+
       span {
         margin-bottom: 4px;
         font-weight: bold;
         color: var(--text-secondary);
       }
-  
+
       input {
         padding: 8px;
         border: 1px solid var(--text-secondary);
@@ -354,26 +353,25 @@ input[type=number] {
         background-color: var(--background);
         font-size: 0.9rem;
         color: var(--text-primary);
-  
+
         &:focus {
           outline: none;
           border-color: var(--primary-accent);
           box-shadow: 0 0 4px var(--primary-accent);
         }
       }
-  
+
       input[type="number"] {
         appearance: textfield; // Removes arrows on number inputs
       }
     }
   }
-  
 }
 
 .clear-order {
-  background-color:  var(--card-bg);
+  background-color: var(--card-bg);
   border: 2px solid var(--warning);
-  color:  var(--warning);
+  color: var(--warning);
   width: fit-content;
   font-size: 0.9rem;
   &:hover {
@@ -382,11 +380,9 @@ input[type=number] {
   }
 }
 
-
 .input-error {
-  border: 2px solid var(--warning)!important;
+  border: 2px solid var(--warning) !important;
 }
-
 
 .order-summary {
   background-color: var(--card-bg);
@@ -395,11 +391,11 @@ input[type=number] {
   padding: 20px;
   margin: 20px auto;
 
-  .discount{
+  .discount {
     color: rgb(255, 60, 60);
   }
-  
-  .original-price{
+
+  .original-price {
     text-decoration: line-through;
   }
 }

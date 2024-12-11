@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="sv">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="mushroom.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" >
+    <link rel="icon" type="image/png" href="mushroom.png" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <title>Svamplycka</title>
   </head>
   <body>
@@ -50,7 +50,7 @@
         <div id="cartSummary"></div>
         <p id="countDown"></p>
         <button id="clearOrder" class="clear-order">Rensa beställning</button>
-        <button id="goToCheckout" href="#checkout" disabled>Till kassan</button>
+        <button id="goToCheckout" disabled>Till kassan</button>
       </div>
     </div>
     <div id="checkout" class="form-container hidden">
@@ -58,42 +58,42 @@
         <label for="fname">
           <span>Förnamn</span>
           <input type="text" id="fname" name="fname">
-          <div id="fname-error" class="error-container"></div>
+          <span id="fname-error" class="error-container"></span>
         </label>
         <label for="lname">
           <span>Efternamn</span>
           <input type="text" id="lname" name="lname">
-          <div id="lname-error" class="error-container"></div>
+          <span id="lname-error" class="error-container"></span>
         </label>
         <label for="street">
           <span>Gata</span>
           <input type="text" id="street" name="street">
-          <div id="street-error" class="error-container"></div>
+          <span id="street-error" class="error-container"></span>
         </label>
         <label for="zip">
           <span>Postnummer</span>
           <input type="number" id="zip" name="zip">
-          <div id="zip-error" class="error-container"></div>
+          <span id="zip-error" class="error-container"></span>
         </label>
         <label for="city">
           <span>Ort</span>
           <input type="text" id="city" name="city">
-          <div id="city-error" class="error-container"></div>
+          <span id="city-error" class="error-container"></span>
         </label>
         <label for="entrycode">
           <span>Portkod</span>
           <input type="text" id="entrycode" name="entrycode">
-          <div id="entrycode-error" class="error-container"></div>
+          <span id="entrycode-error" class="error-container"></span>
         </label>
         <label for="phone">
           <span>Telefon</span>
           <input type="tel" id="phone" name="phone">
-          <div id="phone-error" class="error-container"></div>
+          <span id="phone-error" class="error-container"></span>
         </label>
         <label for="email">
           <span>E-post</span>
           <input type="email" id="email" name="email">
-          <div id="email-error" class="error-container"></div>
+          <span id="email-error" class="error-container"></span>
         </label>
         <input type="submit" id="goToPayment" value="Fortsätt till betalning" disabled> 
       </form>
