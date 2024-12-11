@@ -404,6 +404,9 @@ function clearCartAndForms() {
   );
   cardRadioButton.checked = true;
   switchPaymentMethod(null, "card");
+
+  //hide order summary
+  orderSummary.classList.add("hidden");
 }
 //------------------------------------------------
 
@@ -631,6 +634,7 @@ function validatePayment() {
 
 function submitPayment(e) {
   e.preventDefault();
+  orderSummary.classList.remove("hidden");
   printOrderSummary();
 }
 
