@@ -231,12 +231,9 @@ function calculatePrice() {
 function printCart() {
   cartContainer.innerHTML = "";
   cart.forEach((product) => {
-    const price = (product.amount * product.price).toFixed(2);
-    const discount = (
-      product.amount * product.originalPrice -
-      product.amount * product.price
-    ).toFixed(2);
-    const originalPrice = (product.amount * product.originalPrice).toFixed(2);
+    const price = calculateProductPrice(product);
+    const discount = calculateProductPriceDiscount(product);
+    const originalPrice = calculateProductOriginalPrice(product);
 
     cartContainer.innerHTML += `
      <div class="item">
