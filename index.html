@@ -4,6 +4,7 @@
     <meta charset="UTF-8" >
     <link rel="icon" type="image/png" href="mushroom.png" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta name="description" content="Välkommen till vår svampbutik! Utforska ett brett utbud av svampar. Handla online och få snabb leverans av svampprodukter av högsta kvalitet.">
     <title>Svamplycka</title>
   </head>
   <body>
@@ -18,7 +19,7 @@
     </header>
     <div>
       <button id="toggleThemeBtn">Mörkt läge</button>
-      <select name="sort" id="sort">
+      <select name="sort" id="sort" aria-label="Välj sortering">
         <option value="">Välj sortering</option>
         <option value="ascPrice">Lägsta pris</option>
         <option value="descPrice">Högsta pris</option>
@@ -27,7 +28,7 @@
         <option value="ascName">A-Ö</option>
         <option value="descName">Ö-A</option>
       </select>
-      <select name="filter" id="filter">
+      <select name="filter" id="filter" aria-label="Välj kategori">
         <option value="">Välj kategori</option>
         <option value="">Alla kategorier</option>
         <option value="food">Matsvamp</option>
