@@ -34,3 +34,20 @@ You can view the live project [here](https://medieinstitutet.github.io/fed24d-js
 ![demo-desktop](https://github.com/user-attachments/assets/56b56cb5-0bb4-420d-9e71-3900803e242f)
 
 ![demo-desktop-darkmode](https://github.com/user-attachments/assets/86c6cbd7-b3ef-4704-acd0-e376465d6bd4)
+
+## Authors
+
+- [@NicoleSilfverling](https://www.github.com/NicoleSilfverling)
+
+## Screenshots validation
+### Lighthouse
+![Skärmavbild 2024-12-11 kl  21 30 08](https://github.com/user-attachments/assets/cf44db84-f089-4782-b322-ef18fd448cfa)
+
+### Html validation
+![html-validation](https://github.com/user-attachments/assets/449977b9-a04c-4244-8b4a-eede9820b7a0)
+
+### CSS validation
+![css-validation](https://github.com/user-attachments/assets/58c6d3fd-690b-4e1e-97e0-32dc5358ef71)
+
+
+
