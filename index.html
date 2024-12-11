@@ -105,37 +105,37 @@
           <input type="text" id="discount-code" name="discount-code">
         </label>
         <div id="radios">
-          <label>
+          <label for="card-option">
             <input type="radio" id="card-option" name="payment-option" value="card" checked>
             <span>Betala med kort</span>
           </label>
-          <label>
+          <label for="invoice-option">
             <input type="radio" id="invoice-option" name="payment-option" value="invoice">
             <span>Betala med faktura</span>
           </label>
         </div>
 
         <div id="card" class="card">
-          <label>
+          <label for="cardNumber">
             <span>Kortnummer</span>
             <input type="text" id="cardNumber" name="card-number">
           </label>
-          <label>
+          <label for="expiry">
             <span>Sista giltighetsdag MM/YY</span>
             <input type="text" id="expiry" name="expiry">
           </label>
-          <label>
+          <label for="name">
             <span>Namn på kortet</span>
             <input type="text" id="name" name="name">
           </label>
-          <label>
+          <label for="cvc">
             <span>Säkerhetskod</span>
             <input type="number" id="cvc" name="cvc">
           </label>
         </div>
 
         <div id="invoice" class="invoice hidden">
-          <label>
+          <label for="personalId">
             <span>Personnummer</span>
             <input type="text" id="personalId" name="personal-id">
             <span id="personalIdError" class="error-container"></span>

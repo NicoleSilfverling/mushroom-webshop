@@ -120,13 +120,19 @@ input[type="number"] {
   background-color: var(--card-bg);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  // overflow: hidden;
   text-align: center;
   padding: 20px;
   color: var(--text-primary);
 
   img {
     border-radius: 8px;
+    width: 100%; 
+    height: auto;
+    object-fit: cover;
+
+    &.star-icon {
+      width: 20px;
+    }
   }
   button {
     width: 40px;
@@ -276,7 +282,7 @@ input[type="number"] {
         border: 1px solid var(--text-secondary);
         border-radius: 4px;
         background-color: var(--background);
-        font-size: 0.9;
+        font-size: 0.9rem;
         color: var(--text-primary);
 
         &:focus {

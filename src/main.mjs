@@ -93,7 +93,9 @@ function printProducts() {
   filteredProducts.forEach((product, index) => {
     productContainer.innerHTML += `
         <article class="product-card">
-          <img src=${product.img.src} alt=${product.img.alt}>
+          <img src=${product.img.src} alt=${
+      product.img.alt
+    } width="250" height="250">
           <h2>${product.name}</h2>
           <h4>${product.price} kr</h4>
           <p>Betyg: ${product.rating}</p>
@@ -474,11 +476,11 @@ function printRating(rating) {
 
   //floor removes decimal
   for (let index = 0; index < Math.floor(rating); index++) {
-    starsRating += `<img src="./icons/star.png" alt="hel stjärna">`;
+    starsRating += `<img src="./icons/star.png" class="star-icon" alt="hel stjärna" width="20" height="20">`;
   }
   if (rating % 1 != 0) {
     // if decimal add halfstar
-    starsRating += `<img src="./icons/star-half-empty.png" alt="halv stjärna">`;
+    starsRating += `<img src="./icons/star-half-empty.png" class="star-icon" alt="halv stjärna" width="20" height="20">`;
   }
   return starsRating;
 }
