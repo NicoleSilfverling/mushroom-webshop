@@ -40,7 +40,6 @@ const cardContainer = document.querySelector("#card");
 const invoiceContainer = document.querySelector("#invoice");
 const radios = document.querySelector("#radios");
 const radioButtons = document.querySelectorAll('input[name="payment-option"]');
-const gdprCheckbox = document.querySelector("#gdpr");
 const payBtn = document.querySelector("#payBtn");
 const orderSummary = document.querySelector("#orderSummary");
 
@@ -269,7 +268,19 @@ function printCart() {
   cartSummary.innerHTML = `
     <p class="total-price">${totalPrice.toFixed(2)} kr</p>
   `;
+
+  //displays amount of items in cart
   itemsInCart.innerHTML = `<div class="items-in-cart">${amountOfItemsInCart}</div>`;
+
+  const itemsElement = itemsInCart.querySelector(".items-in-cart");
+
+  // Add scale up
+  itemsElement.classList.add("scale-up");
+
+  // Remove scale-up after the transition to bring it back to normal size
+  setTimeout(() => {
+    itemsElement.classList.remove("scale-up");
+  }, 300); // Match the CSS transition duration (0.3s)
 }
 
 //------------------------------------------------
