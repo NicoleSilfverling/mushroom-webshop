@@ -32,6 +32,8 @@ const cardContainer = document.querySelector("#card");
 const invoiceContainer = document.querySelector("#invoice");
 const radios = document.querySelector("#radios");
 const radioButtons = document.querySelectorAll('input[name="payment-option"]');
+const gdprCheckbox = document.querySelector("#gdpr");
+const payBtn = document.querySelector("#payBtn");
 
 //Checkout form inputs
 const inputs = [
@@ -52,6 +54,7 @@ clearOrder.addEventListener("click", clearCartAndForms);
 sort.addEventListener("change", sortProducts);
 filter.addEventListener("change", filterProducts);
 checkoutForm.addEventListener("submit", goToPayment);
+gdprCheckbox.addEventListener("change", validatePayment);
 
 inputs.forEach((input) => {
   input.addEventListener("focusout", (e) => {
@@ -563,5 +566,13 @@ function removeInvoiceOption() {
     invoiceContainer.classList.add("hidden");
   } else {
     radios.classList.remove("hidden");
+  }
+}
+
+function validatePayment() {
+  if (gdprCheckbox.checked) {
+    payBtn.removeAttribute("disabled");
+  } else {
+    payBtn.setAttribute("disabled", "");
   }
 }

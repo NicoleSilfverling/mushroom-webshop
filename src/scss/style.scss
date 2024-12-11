@@ -163,7 +163,7 @@ input[type=number] {
   background-color: var(--card-bg);
   // border: 1px solid #e0e0e0;
   border-radius: 8px;
-  width: 100%;
+  width: 280px;
   // margin: 20px;
   padding: 20px;
   margin: 20px auto;
@@ -247,7 +247,7 @@ input[type=number] {
   background-color: var(--card-bg);
   // border: 1px solid #e0e0e0;
   border-radius: 8px;
-  width: 100%;
+  width: 280px;
   padding: 20px;
   margin: 20px auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -291,13 +291,11 @@ input[type=number] {
   }
 }
 
-
 .payment-method {
   padding: 16px;
-  // border: 1px solid var(--text-secondary);
   border-radius: 8px;
   background-color: var(--card-bg);
-  max-width: 400px;
+  width: 280px;
   margin: 0 auto;
 
   form {

@@ -100,6 +100,10 @@
     </div>
     <div id="payment" class="payment-method hidden">
       <form id="paymentForm">
+        <label for="discount-code">
+          <span>Rabattkod</span>
+          <input type="text" id="discount-code" name="discount-code">
+        </label>
         <div id="radios">
           <label>
             <input type="radio" id="card-option" name="payment-option" value="card" checked>
@@ -110,7 +114,6 @@
             <span>Betala med faktura</span>
           </label>
         </div>
-
 
         <div id="card" class="card">
           <label>
@@ -131,9 +134,6 @@
           </label>
         </div>
 
-
-
-
         <div id="invoice" class="invoice hidden">
           <label>
             <span>Personnummer</span>
@@ -141,16 +141,17 @@
           </label>
         </div>
 
-
-        <label for="gdpr">
-          <input type="checkbox" id="gdpr" name="gdpr">
-          <span>GDPR</span>
-        </label>
-        <label for="newsletter">
-          <input type="checkbox" id="newsletter" name="newsletter" checked>
-          <span>Nyhetsbrev</span>
-        </label>
-        <input type="submit" value="Betala"> 
+        <div class="checkbox-container">
+          <label for="gdpr">
+            <input type="checkbox" id="gdpr" name="gdpr" required>
+            <span>GDPR*</span>
+          </label>
+          <label for="newsletter">
+            <input type="checkbox" id="newsletter" name="newsletter" checked>
+            <span>Nyhetsbrev</span>
+          </label>
+        </div>
+        <input type="submit" id="payBtn" value="Betala" disabled> 
       </form>
     </div>
        <footer>
