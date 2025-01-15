@@ -24,7 +24,7 @@ This is a web application for a **Mushroom Shop** that allows users to browse, o
 - **Vite**: For fast development and building the project.
 
 ## Demo
-You can view the live project [here](https://medieinstitutet.github.io/fed24d-js-intro-inl-1-webshop-NicoleSilfverling/).
+You can view the live project [here](https://nicolesilfverling.github.io/mushroom-webshop/).
 
 ![mobile-demo](https://github.com/user-attachments/assets/c9ce3390-6db1-4d1b-87f1-d5d4757f527b)
 
